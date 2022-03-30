@@ -1,9 +1,10 @@
 import React from 'react'
 
 function NewArrivals() {
+
   return (
     <div>
-           <div className="container new-arrivals">
+       <div className="container new-arrivals">
         <div className="heading heading-flex mb-3">
           <div className="heading-left">
             <h2 className="title">New Arrivals</h2>{/* End .title */}
@@ -54,6 +55,8 @@ function NewArrivals() {
                                         }
                                     }
                                 }">
+
+
               <div className="product product-2">
                 <figure className="product-media">
   
