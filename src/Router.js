@@ -13,6 +13,8 @@ const Router = () => {
         <Route path="/products" element={<Product />} />
         <Route path="/users" element={<User />} />
         <Route path="/orders" element={<Order />} />
+        <Route path="*" element={<h1>404</h1>} />
+
       </Routes>
     </>
   );
