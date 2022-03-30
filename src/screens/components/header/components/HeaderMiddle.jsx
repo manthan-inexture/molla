@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 function HeaderMiddle() {
   return (
@@ -130,10 +130,12 @@ function HeaderMiddle() {
                   <a href="cart.html" className="btn btn-primary">
                     View Cart
                   </a>
-                  <a href="checkout.html" className="btn btn-outline-primary-2">
-                    <span>Checkout</span>
-                    <i className="icon-long-arrow-right" />
-                  </a>
+                  <NavLink to="/checkout">
+                    <a href="checkout.html" className="btn btn-outline-primary-2">
+                      <span>Checkout</span>
+                      <i className="icon-long-arrow-right" />
+                    </a>
+                  </NavLink>
                 </div>
                 {/* End .dropdown-cart-total */}
               </div>
