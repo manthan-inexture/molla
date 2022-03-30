@@ -12,7 +12,7 @@ function HeaderCenter() {
           <div className="header-left">
             <div className="dropdown category-dropdown">
               <a
-                href="#"
+                to="shop"
                 className="dropdown-toggle"
                 role="button"
                 data-toggle="dropdown"
@@ -30,19 +30,19 @@ function HeaderCenter() {
                     style={{ touchAction: "pan-y" }}
                   >
                     <li>
-                      <a href="#">All</a>
+                      <NavLink to="shop" >All</NavLink>
                     </li>
                     <li>
-                      <a href="#">man</a>
+                      <NavLink to="shop">man</NavLink>
                     </li>
                     <li>
-                      <a href="#">women</a>
+                      <NavLink to="shop">women</NavLink>
                     </li>
                     <li>
-                      <a href="#">Jewellery</a>
+                      <NavLink to="shop">Jewellery</NavLink>
                     </li>
                     <li>
-                      <a href="#">Electronics</a>
+                      <NavLink to="shop">Electronics</NavLink>
                     </li>
                   </ul>
                   {/* End .menu-vertical */}
