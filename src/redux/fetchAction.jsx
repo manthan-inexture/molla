@@ -1,6 +1,5 @@
 import { FETCH, SUCCESS, FAILURE } from './fetchTypes';
 import axios from 'axios';
-
 export const fetchRequest = props => {
     return {type: FETCH}
 };

@@ -18,7 +18,7 @@ function PupularCategories() {
             </NavLink>
         </div>{/* End .mx-auto col-lg-2 */}
         <div className="col-6 mx-auto col-lg-2">
-        <NavLink to="shop/man" className="cat-block">
+        <NavLink to="shop/men's clothing" className="cat-block">
             <figure>
               <span>
                 <img src="assets/images/demos/demo-4/cats/2.png" alt="Category image" />
@@ -28,7 +28,7 @@ function PupularCategories() {
             </NavLink>
         </div>{/* End .mx-auto col-lg-2 */}
         <div className="col-6 mx-auto col-lg-2">
-        <NavLink to="shop/women" className="cat-block" >
+        <NavLink to="shop/women's clothing" className="cat-block" >
             <figure>
               <span>
                 <img src="assets/images/demos/demo-4/cats/3.png" alt="Category image" />
@@ -38,7 +38,7 @@ function PupularCategories() {
             </NavLink>
         </div>{/* End .mx-auto col-lg-2 */}
         <div className="col-6 mx-auto col-lg-2">
-          <NavLink to="shop/jewellery" className="cat-block">
+          <NavLink to="shop/jewelery" className="cat-block">
             <figure>
               <span>
                 <img src="assets/images/demos/demo-4/cats/4.png" alt="Category image" />

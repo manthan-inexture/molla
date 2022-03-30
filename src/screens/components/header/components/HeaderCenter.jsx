@@ -30,19 +30,19 @@ function HeaderCenter() {
                     style={{ touchAction: "pan-y" }}
                   >
                     <li>
-                      <NavLink to="shop" >All</NavLink>
+                      <NavLink to="shop/all" >All</NavLink>
                     </li>
                     <li>
-                      <NavLink to="shop">man</NavLink>
+                      <NavLink to="shop/men's clothing">man</NavLink>
                     </li>
                     <li>
-                      <NavLink to="shop">women</NavLink>
+                      <NavLink to="shop/women's clothing">women</NavLink>
                     </li>
                     <li>
-                      <NavLink to="shop">Jewellery</NavLink>
+                      <NavLink to="shop/jewelery">Jewellery</NavLink>
                     </li>
                     <li>
-                      <NavLink to="shop">Electronics</NavLink>
+                      <NavLink to="shop/electronics">Electronics</NavLink>
                     </li>
                   </ul>
                   {/* End .menu-vertical */}

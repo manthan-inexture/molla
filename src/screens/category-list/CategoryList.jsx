@@ -16,7 +16,7 @@ function CategoryList(props) {
       <CategoryListNav />
       {/* page-list-nav end */}
       {/* main-content-start */}
-      <PageContent />
+      <PageContent  category={productName.category}/>
       {/* main-content-end */}
     </div>
   );

@@ -1,18 +1,29 @@
-import React,{ useEffect } from "react";
+import React ,{useState} from "react";
 import Category from "./Category";
 import List from "./List";
 import PageNav from "./PageNav";
 import Toolbox from "./Toolbox";
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchProducts } from "../../../redux/fetchAction";
+import {  useSelector } from 'react-redux';
 
 const PageContent = (props) => {
-  const dispatch = useDispatch();
-  const All_Products = useSelector(state => state.fetchReducer.data)
-  console.log(All_Products)
-  useEffect(() => {
-    dispatch(fetchProducts())
-  },[])
+  
+  const All_Products = useSelector(state => state?.fetchReducer?.data)
+  // console.log("All_Products",All_Products)
+  
+  const filterdata = All_Products?.filter((items,index)=>{
+    if (props.category=='all' || props.category== undefined){
+         return items
+    }
+    else return items?.category==props?.category
+  })
+ //  console.log("filterdata", filterdata) 
+ //pagination
+ const [currentPage,setCurrentPage] = useState(1);
+ const productPerPage = 3;
+ const indexOfLastProduct = currentPage * productPerPage;
+ const indexOfFirstProduct = indexOfLastProduct - productPerPage;
+ const currentProducts = filterdata.slice(indexOfFirstProduct, indexOfLastProduct);
+ const paginate =(number) => setCurrentPage(number)
   return (
     <>
       <div className="page-content">
@@ -24,11 +35,16 @@ const PageContent = (props) => {
 
               {/* proucts-start */}
               <div className="products mb-3">
-                <List />
+           { currentProducts?.map((data,index)=>{
+                return  <List  data={data}/>
+           })}
+               
               </div>
               {/* proucts-end */}
               {/* page-nav-start */}
-              <PageNav />
+              <PageNav productPerPage={productPerPage} 
+                       totalProducts={All_Products.length} 
+                       paginate={paginate} />
               {/* page-nav-end */}
             </div>
             {/* End .col-lg-9 */}
