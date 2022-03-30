@@ -1,18 +1,27 @@
-import React,{ useEffect } from "react";
+import React,{ useState } from "react";
 import Category from "./Category";
 import List from "./List";
 import PageNav from "./PageNav";
 import Toolbox from "./Toolbox";
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchProducts } from "../../../redux/fetchAction";
+import { useSelector } from 'react-redux';
+
 
 const PageContent = (props) => {
-  const dispatch = useDispatch();
+
   const All_Products = useSelector(state => state.fetchReducer.data)
   console.log(All_Products)
-  useEffect(() => {
-    dispatch(fetchProducts())
-  },[])
+ 
+
+  // pagination
+  const [currentPage,setCurrentPage] = useState(1);
+  const productPerPage = 5;
+  const indexOfLastProduct = currentPage * productPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productPerPage;
+  const currentProducts = All_Products.slice(indexOfFirstProduct, indexOfLastProduct);
+  const paginate =(number) => setCurrentPage(number)
+
+ 
+
   return (
     <>
       <div className="page-content">
@@ -24,11 +33,16 @@ const PageContent = (props) => {
 
               {/* proucts-start */}
               <div className="products mb-3">
-                <List />
+                {currentProducts.map((product) => (
+                  <List product={product}/>
+                ))}
+                
               </div>
               {/* proucts-end */}
               {/* page-nav-start */}
-              <PageNav />
+              <PageNav productPerPage={productPerPage} 
+                       totalProducts={All_Products.length} 
+                       paginate={paginate} />
               {/* page-nav-end */}
             </div>
             {/* End .col-lg-9 */}

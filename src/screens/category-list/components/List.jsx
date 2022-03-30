@@ -1,6 +1,8 @@
 import React from "react";
 
-const List = (props) => {
+const List = ({product}) => {
+  const {id, title, category, description, image, price, rating} = product;
+ 
   return (
     <div>
       <div className="product product-list">
@@ -9,7 +11,7 @@ const List = (props) => {
             <figure className="product-media">
               <a href="product.html">
                 <img
-                  src="assets/images/products/product-6.jpg"
+                  src={image}
                   alt="Product image"
                   className="product-image"
                 />
@@ -21,16 +23,18 @@ const List = (props) => {
           <div className="col-6 col-lg-3 order-lg-last">
             <div className="product-list-action">
               <div className="product-price">
-                <span className="out-price">$120.00</span>
+                <span className="out-price">${price}</span>
               </div>
               {/* End .product-price */}
               <div className="ratings-container">
                 <div className="ratings">
-                  <div className="ratings-val" style={{ width: "80%" }} />
+                  
+                  <div className="ratings-val" style={{ width: `${rating.rate * 20}%` }} />
+                  {rating.rate}
                   {/* End .ratings-val */}
                 </div>
                 {/* End .ratings */}
-                <span className="ratings-text">( 6 Reviews )</span>
+                <span className="ratings-text">( {rating.count} Reviews )</span>
               </div>
               {/* End .rating-container */}
 
@@ -45,17 +49,16 @@ const List = (props) => {
           <div className="col-lg-6">
             <div className="product-body product-action-inner">
               <div className="product-cat">
-                <a href="#">Jackets</a>
+                <a href="#">{category}</a>
               </div>
               {/* End .product-cat */}
               <h3 className="product-title">
-                <a href="product.html">Khaki utility boiler jumpsuit</a>
+                <a href="product.html">{title}</a>
               </h3>
               {/* End .product-title */}
               <div className="product-content">
                 <p>
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                  Phasellus hendrerit. Pellentesque{" "}
+                  {description}
                 </p>
               </div>
               {/* End .product-content */}

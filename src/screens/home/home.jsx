@@ -7,6 +7,7 @@ import ShopToday from "./components/ShopToday.jsx";
 import Brand from "./components/Brand.jsx";
 import Services from "./components/Services.jsx";
 
+
 import Latestdeal from "./components/latestdeal.jsx";
 function Home() {
   return (
@@ -33,7 +34,7 @@ function Home() {
           {/*brand end */}
 
           {/*ShopToday start */}
-          <ShopToday />
+          {/* <ShopToday /> */}
           {/*ShopToday end */}
           <div>
             <div className="mb-4" />
