@@ -1,10 +1,18 @@
-import React from "react";
+import React,{ useEffect } from "react";
 import Category from "./Category";
 import List from "./List";
 import PageNav from "./PageNav";
 import Toolbox from "./Toolbox";
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts } from "../../../redux/fetchAction";
 
 const PageContent = (props) => {
+  const dispatch = useDispatch();
+  const All_Products = useSelector(state => state.fetchReducer.data)
+  console.log(All_Products)
+  useEffect(() => {
+    dispatch(fetchProducts())
+  },[])
   return (
     <>
       <div className="page-content">
