@@ -20,7 +20,7 @@ export default function Carosol() {
                     "responsive": {
                         "1200": {
                             "nav": true,
-                            "dots": false
+                            "dots": true
                         }
                     }
                 }'

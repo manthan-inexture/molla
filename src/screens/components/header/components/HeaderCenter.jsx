@@ -12,6 +12,11 @@ function HeaderCenter() {
         <div className="container">
           <div className="header-left">
           {location.pathname == '/shop' && <BrowseCategory />}
+          { location.pathname == "/shop/men's%20clothing" && <BrowseCategory />}
+          { location.pathname == "/shop/women's%20clothing" && <BrowseCategory />}
+          { location.pathname == "/shop/jewelery" && <BrowseCategory />}
+          { location.pathname == "/shop/electronics" && <BrowseCategory />}
+          { location.pathname == "/shop/all" && <BrowseCategory />}
             {/* End .category-dropdown */}
           </div>
           {/* End .header-left */}
