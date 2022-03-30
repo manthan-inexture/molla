@@ -1,9 +1,10 @@
-import React,{useState} from 'react'
-import {handlesignup,handlegooglesignin} from "./fireBaseAuth"
+import React, { useState } from 'react'
+import useFireBaseAuth from "./useFireBaseAuth"
 const Register = () => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const { handlesignup, handlegooglesignin } = useFireBaseAuth()
 
     return (
         <div className="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
@@ -17,7 +18,7 @@ const Register = () => {
                     <input type="password" className="form-control" id="register-password" name="register-password" onChange={e => setPassword(e.target.value)} required />
                 </div>{/* End .form-group */}
                 <div className="form-footer">
-                    <button onClick={(e) => { handlesignup(e,email,password)}} className="btn btn-outline-primary-2">
+                    <button onClick={(e) => { handlesignup(e, email, password) }} className="btn btn-outline-primary-2">
                         <span>SIGN UP</span>
                         <i className="icon-long-arrow-right" />
                     </button>
@@ -27,7 +28,7 @@ const Register = () => {
                 <p className="text-center">or sign in with</p>
                 <div className="row">
                     <div className="col-sm-6">
-                        <a onClick={() => { handlegooglesignin()}} className="btn btn-login btn-g">
+                        <a onClick={() => { handlegooglesignin() }} className="btn btn-login btn-g">
                             <i className="icon-google" />
                             Login With Google
                         </a>

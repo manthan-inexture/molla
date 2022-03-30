@@ -15,6 +15,7 @@ import Contact from "../protectedScreens/contact/Contact"
 import ProductView from '../protectedScreens/productDetails/ProductView'
 import Checkout from '../protectedScreens/checkout/Checkout'
 import PrivateRoute from "./PrivateRoute";
+import Cart from "../protectedScreens/cart/Cart"
 
 const Router = () => {
 
@@ -27,14 +28,15 @@ const Router = () => {
             <Route path="/shop/:category" element={<CategoryList />} />
             <Route path="signin" element={<RegisterAndsignin />} />
             <Route path="about" element={<About />} />
-            
+
             {/* private */}
             <Route path='/' element={<PrivateRoute islogin={islogin} />} >
                 <Route path="contact" element={<Contact />} />
                 <Route path="product" element={<ProductView />} />
                 <Route path="checkout" element={<Checkout />} />
+                <Route path="viewcart" element={<Cart />} />
             </Route >
-            <Route path='*' element={<Errors/>} />
+            <Route path='*' element={<Errors />} />
         </Routes>
     )
 }

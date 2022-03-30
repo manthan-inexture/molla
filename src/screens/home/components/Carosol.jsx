@@ -1,11 +1,18 @@
 import React from "react";
-
+import {
+  Link
+} from "react-router-dom";
 export default function Carosol() {
   return (
     <main className="main">
       <div className="intro-slider-container mb-5">
         <div
           className="intro-slider owl-carousel owl-theme owl-nav-inside owl-light"
+          style={
+            {
+              display: "flex"
+            }
+          }
           data-toggle="owl"
           data-owl-options='{
                     "dots": true,
@@ -42,10 +49,10 @@ export default function Carosol() {
                     </span>
                   </div>
                   {/* End .intro-price */}
-                  <a href="category.html" className="btn btn-primary btn-round">
+                  <Link to="/shop" className="btn btn-primary btn-round">
                     <span>Shop More</span>
                     <i className="icon-long-arrow-right" />
-                  </a>
+                  </Link>
                 </div>
                 {/* End .col-lg-11 offset-lg-1 */}
               </div>
@@ -78,10 +85,10 @@ export default function Carosol() {
                     </span>
                   </div>
                   {/* End .intro-price */}
-                  <a href="category.html" className="btn btn-primary btn-round">
+                  <Link to="/shop" className="btn btn-primary btn-round">
                     <span>Shop More</span>
                     <i className="icon-long-arrow-right" />
-                  </a>
+                  </Link>
                 </div>
                 {/* End .col-md-6 offset-md-6 */}
               </div>

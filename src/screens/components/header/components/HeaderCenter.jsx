@@ -1,7 +1,8 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-
+import { NavLink, useLocation} from "react-router-dom";
+import BrowseCategory from "./BrowseCategory";
 function HeaderCenter() {
+  const location =useLocation()
   return (
     <div className="sticky-wrapper" style={{}}>
       <div
@@ -10,47 +11,7 @@ function HeaderCenter() {
       >
         <div className="container">
           <div className="header-left">
-            <div className="dropdown category-dropdown">
-              <a
-                to="shop"
-                className="dropdown-toggle"
-                role="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-                data-display="static"
-                title="Browse Categories"
-              >
-                Browse Categories <i className="icon-angle-down" />
-              </a>
-              <div className="dropdown-menu">
-                <nav className="side-nav">
-                  <ul
-                    className="menu-vertical sf-arrows sf-js-enabled"
-                    style={{ touchAction: "pan-y" }}
-                  >
-                    <li>
-                      <NavLink to="shop/all" >All</NavLink>
-                    </li>
-                    <li>
-                      <NavLink to="shop/men's clothing">man</NavLink>
-                    </li>
-                    <li>
-                      <NavLink to="shop/women's clothing">women</NavLink>
-                    </li>
-                    <li>
-                      <NavLink to="shop/jewelery">Jewellery</NavLink>
-                    </li>
-                    <li>
-                      <NavLink to="shop/electronics">Electronics</NavLink>
-                    </li>
-                  </ul>
-                  {/* End .menu-vertical */}
-                </nav>
-                {/* End .side-nav */}
-              </div>
-              {/* End .dropdown-menu */}
-            </div>
+          {location.pathname == '/shop' && <BrowseCategory />}
             {/* End .category-dropdown */}
           </div>
           {/* End .header-left */}
