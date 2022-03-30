@@ -2,8 +2,11 @@ import React from "react";
 import PageHeader from "./components/PageHeader";
 import CategoryListNav from "./components/CategoryListNav";
 import PageContent from "./components/PageContent";
+import { useParams } from "react-router-dom";
 
 function CategoryList(props) {
+ const productName = useParams()
+ console.log("productName",productName.category)
   return (
     <div>
       {/* page-heading-start */}
@@ -13,7 +16,7 @@ function CategoryList(props) {
       <CategoryListNav />
       {/* page-list-nav end */}
       {/* main-content-start */}
-      <PageContent />
+      <PageContent  category={productName.category}/>
       {/* main-content-end */}
     </div>
   );

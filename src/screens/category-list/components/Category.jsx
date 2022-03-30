@@ -1,6 +1,7 @@
 import React from "react";
 
 const Category = (props) => {
+
   return (
     <div>
       <div className="widget widget-collapsible">
@@ -25,13 +26,22 @@ const Category = (props) => {
                     type="checkbox"
                     className="custom-control-input"
                     id="cat-1"
+                    value="all"
+                    onClick={(e)=>{
+                      let checked =e.target.checked;
+                      if(checked)
+                      {
+                        console.log("category selected is ",checked,e.target.value)
+                      }
+                      else  console.log("category not selected ")
+                    }}
                   />
                   <label className="custom-control-label" htmlFor="cat-1">
                     All
                   </label>
                 </div>
                 {/* End .custom-checkbox */}
-                <span className="item-count">3</span>
+               
               </div>
               {/* End .filter-item */}
               <div className="filter-item">
@@ -40,13 +50,22 @@ const Category = (props) => {
                     type="checkbox"
                     className="custom-control-input"
                     id="cat-2"
+                    value="men's clothing"
+                    onClick={(e)=>{
+                      let checked =e.target.checked;
+                      if(checked)
+                      {
+                        console.log("category selected is ",checked,e.target.value)
+                      }
+                      else  console.log("category not selected ")
+                    }}
                   />
                   <label className="custom-control-label" htmlFor="cat-2">
                     Man
                   </label>
                 </div>
                 {/* End .custom-checkbox */}
-                <span className="item-count">0</span>
+                
               </div>
               {/* End .filter-item */}
               <div className="filter-item">
@@ -55,13 +74,22 @@ const Category = (props) => {
                     type="checkbox"
                     className="custom-control-input"
                     id="cat-3"
+                    value="women's clothing"
+                    onClick={(e)=>{
+                      let checked =e.target.checked;
+                      if(checked)
+                      {
+                        console.log("category selected is ",checked,e.target.value)
+                      }
+                      else  console.log("category not selected ")
+                    }}
                   />
                   <label className="custom-control-label" htmlFor="cat-3">
                     Women
                   </label>
                 </div>
                 {/* End .custom-checkbox */}
-                <span className="item-count">4</span>
+               
               </div>
               {/* End .filter-item */}
               <div className="filter-item">
@@ -70,13 +98,22 @@ const Category = (props) => {
                     type="checkbox"
                     className="custom-control-input"
                     id="cat-4"
+                    value="jewelery"
+                    onClick={(e)=>{
+                      let checked =e.target.checked;
+                      if(checked)
+                      {
+                        console.log("category selected is ",checked,e.target.value)
+                      }
+                      else  console.log("category not selected ")
+                    }}
                   />
                   <label className="custom-control-label" htmlFor="cat-4">
                     Jewellery
                   </label>
                 </div>
                 {/* End .custom-checkbox */}
-                <span className="item-count">2</span>
+              
               </div>
               {/* End .filter-item */}
               <div className="filter-item">
@@ -85,13 +122,22 @@ const Category = (props) => {
                     type="checkbox"
                     className="custom-control-input"
                     id="cat-5"
+                    value="electronics"
+                    onClick={(e)=>{
+                      let checked =e.target.checked;
+                      if(checked)
+                      {
+                        console.log("category selected is ",checked,e.target.value)
+                      }
+                      else  console.log("category not selected ")
+                    }}
                   />
                   <label className="custom-control-label" htmlFor="cat-5">
                     Electronic
                   </label>
                 </div>
                 {/* End .custom-checkbox */}
-                <span className="item-count">2</span>
+              
               </div>
               {/* End .filter-item */}
             </div>

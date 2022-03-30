@@ -13,7 +13,7 @@ const Cart = () => {
           >
             <div className="container">
               <h1 className="page-title">
-                Checkout<span>Shop</span>
+                Checkout<span>Shops</span>
               </h1>
             </div>
             {/* End .container */}
