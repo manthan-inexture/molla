@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 function HeaderMiddle() {
+  const [keyword, setKeyword]=useState();
+  const HandleCLick =(e)=>{ 
+    e.preventDefault();
+    alert(keyword)
+  }
+
   return (
     <div>
       <div className="header-middle">
@@ -26,7 +32,7 @@ function HeaderMiddle() {
               <a href="#" className="search-toggle" role="button">
                 <i className="icon-search" />
               </a>
-              <form action="#" method="get">
+              <form action="#" method="get" onSubmit={()=>HandleCLick}>
                 <div className="header-search-wrapper search-wrapper-wide">
                   <label htmlFor="q" className="sr-only">
                     Search
@@ -41,6 +47,7 @@ function HeaderMiddle() {
                     id="q"
                     placeholder="Search product ..."
                     required
+                    onChange={(e)=>setKeyword(e.target.value)}
                   />
                 </div>
                 {/* End .header-search-wrapper */}
