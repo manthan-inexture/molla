@@ -49,7 +49,7 @@ const Header = () => {
               {/* Add icons to the links using the .nav-icon class
                  with font-awesome or any other icon font library */}
               <li className="nav-item">
-                <Link to="/users" className="nav-link">
+                <Link to="/admin/users" className="nav-link">
                   <i className="nav-icon fas fa-th" />
                   <p>Users</p>
                 </Link>
@@ -57,13 +57,13 @@ const Header = () => {
                 {/* </a> */}
               </li>
               <li className="nav-item">
-                <Link to="/products" className="nav-link">
+                <Link to="/admin/products" className="nav-link">
                   <i className="nav-icon fas fa-th" />
                   <p>Products</p>
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/orders" className="nav-link">
+                <Link to="/admin/orders" className="nav-link">
                   <i className="nav-icon fas fa-th" />
                   <p>Orders</p>
                 </Link>
