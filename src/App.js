@@ -17,6 +17,7 @@ function App() {
   const data = useSelector((state) => state);
   console.log(data);
 
+  console.log(islog);
   return (
     <>
       <Header />
