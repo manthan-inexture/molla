@@ -1,21 +1,44 @@
-import React ,{useState} from "react";
+import React ,{useEffect, useState} from "react";
 import Category from "./Category";
 import List from "./List";
 import PageNav from "./PageNav";
 import Toolbox from "./Toolbox";
 import {  useSelector } from 'react-redux';
 
-const PageContent = (props) => {
+const PageContent = ({category}) => {
+  const [filter, setFilter] = useState([])
+  const [filterdata, setFilterdata] = useState([])
+
+const changeFilter = (arr) => {
+  setFilter(arr)
+}
+
+useEffect(()=>{
+  if(category==="all" || category===undefined){
+    setFilter(["all"])
+  }else{
+  setFilter([...filter, category])
+  }
+},[category])
+
+  const All_Products = useSelector(state => state?.product?.data)
+  console.log("All_Products",All_Products)
   
-  const All_Products = useSelector(state => state?.fetchReducer?.data)
-  // console.log("All_Products",All_Products)
-  
-  const filterdata = All_Products?.filter((items,index)=>{
-    if (props.category=='all' || props.category== undefined){
-         return items
-    }
-    else return items?.category==props?.category
-  })
+  useEffect(()=>{
+    console.log("hey", All_Products )
+    if(All_Products.length !== 0) {
+    const data = All_Products?.filter((item,index)=>{
+      console.log(filter,item.category, filter.includes(item.category))
+      if (filter.includes('all')){
+           return true
+      }
+      else return filter.includes(item.category)
+    })
+    setFilterdata(data)
+  }
+  },[All_Products,filter])
+
+
  //  console.log("filterdata", filterdata) 
  //pagination
  const [currentPage,setCurrentPage] = useState(1);
@@ -50,7 +73,7 @@ const PageContent = (props) => {
             {/* End .col-lg-9 */}
             <aside className="col-lg-3 order-lg-first">
               <div className="sidebar sidebar-shop">
-                <Category />
+                <Category changeFilter={changeFilter} />
               </div>
               {/* End .sidebar sidebar-shop */}
             </aside>

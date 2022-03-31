@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const Category = (props) => {
+const Category = ({changeFilter}) => {
+   const [test,setTest]=useState([])
+   console.log(test)
 
+   useEffect(()=>{
+    changeFilter(test)
+   },[test])
   return (
     <div>
       <div className="widget widget-collapsible">
@@ -31,9 +36,12 @@ const Category = (props) => {
                       let checked =e.target.checked;
                       if(checked)
                       {
+                        setTest([e.target.value])
                         console.log("category selected is ",checked,e.target.value)
                       }
-                      else  console.log("category not selected ")
+                       else  {
+                        setTest(test.filter(item => item !== e.target.value))
+                        console.log("category not selected ")}
                     }}
                   />
                   <label className="custom-control-label" htmlFor="cat-1">
@@ -55,9 +63,12 @@ const Category = (props) => {
                       let checked =e.target.checked;
                       if(checked)
                       {
+                        setTest([...test,e.target.value])
                         console.log("category selected is ",checked,e.target.value)
                       }
-                      else  console.log("category not selected ")
+                      else  {
+                        setTest(test.filter(item => item !== e.target.value))
+                        console.log("category not selected ")}
                     }}
                   />
                   <label className="custom-control-label" htmlFor="cat-2">
@@ -79,9 +90,12 @@ const Category = (props) => {
                       let checked =e.target.checked;
                       if(checked)
                       {
+                        setTest([...test,e.target.value])
                         console.log("category selected is ",checked,e.target.value)
                       }
-                      else  console.log("category not selected ")
+                       else  {
+                        setTest(test.filter(item => item !== e.target.value))
+                        console.log("category not selected ")}
                     }}
                   />
                   <label className="custom-control-label" htmlFor="cat-3">
@@ -103,9 +117,12 @@ const Category = (props) => {
                       let checked =e.target.checked;
                       if(checked)
                       {
+                        setTest([...test,e.target.value])
                         console.log("category selected is ",checked,e.target.value)
                       }
-                      else  console.log("category not selected ")
+                       else  {
+                        setTest(test.filter(item => item !== e.target.value))
+                        console.log("category not selected ")}
                     }}
                   />
                   <label className="custom-control-label" htmlFor="cat-4">
@@ -127,9 +144,12 @@ const Category = (props) => {
                       let checked =e.target.checked;
                       if(checked)
                       {
+                        setTest([...test,e.target.value])
                         console.log("category selected is ",checked,e.target.value)
                       }
-                      else  console.log("category not selected ")
+                       else  {
+                        setTest(test.filter(item => item !== e.target.value))
+                        console.log("category not selected ")}
                     }}
                   />
                   <label className="custom-control-label" htmlFor="cat-5">
