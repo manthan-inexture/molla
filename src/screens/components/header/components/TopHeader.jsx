@@ -10,9 +10,12 @@ import {
 import { isNotSignin } from "../../../../redux/users/actions"
 function TopHeader() {
   const dispatch = useDispatch()
+  const islog = localStorage.getItem("islogin");
   let navigate = useNavigate();
   const handlelogout = () => {
-    dispatch(isNotSignin());
+    // dispatch(isNotSignin());
+    localStorage.setItem("islogin", false);
+
     navigate('/signin');
   }
   const islogin = useSelector((state) => state.usersignin.isauth);
@@ -33,7 +36,7 @@ function TopHeader() {
                 <ul>
                   <li>
                     {
-                      islogin == true ? <a onClick={handlelogout}>Logout</a> : <Link to="/signin" data-toggle="modal">
+                      islog == "true" ? <a onClick={handlelogout}>Logout</a> : <Link to="/signin" data-toggle="modal">
                       Sign in / Sign up
                       </Link>
                     }

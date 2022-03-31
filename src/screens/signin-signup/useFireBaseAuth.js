@@ -31,6 +31,7 @@ const useFireBaseAuth = () => {
 
         dispatch(adduser(user))
         dispatch(isSignin())
+        localStorage.setItem("islogin", true);
         navigate('/shop');
       })
       .catch((error) => {
@@ -53,6 +54,7 @@ const useFireBaseAuth = () => {
       }
       dispatch(adduser(user))
       dispatch(isSignin())
+      localStorage.setItem("islogin", "true");
       navigate('/shop');
     }).catch((error) => {
       alert("you are blocked by admin");
@@ -77,6 +79,7 @@ const useFireBaseAuth = () => {
         }
         dispatch(adduser(user))
         dispatch(isSignin())
+        localStorage.setItem("islogin", "true");
         navigate('/shop');
       })
       .catch((error) => {
