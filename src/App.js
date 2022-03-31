@@ -16,7 +16,8 @@ function App() {
   }, []);
   const data = useSelector((state) => state);
   console.log(data);
-
+  const islog = localStorage.getItem("islogin");
+  console.log(islog);
   return (
     <>
       <Header />
