@@ -3,8 +3,16 @@ import Category from "./Category";
 import List from "./List";
 import PageNav from "./PageNav";
 import { useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
 
 const PageContent = ({ category }) => {
+  const [searchPrams, setSearchParams] = useSearchParams();
+  useEffect(() => {
+    setSearchParams({q: category})
+  },[])
+  const test = searchPrams.get('q');
+  console.log(test)
+
   const [filter, setFilter] = useState([]);
   const [filterdata, setFilterdata] = useState([]);
   console.log("category", category);
