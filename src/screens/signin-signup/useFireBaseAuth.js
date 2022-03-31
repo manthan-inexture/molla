@@ -66,7 +66,7 @@ const useFireBaseAuth = () => {
     e.preventDefault();
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // alert("signup successful");
+        alert("signup successful");
         const credential = userCredential.user;
         const user = {
           userid: credential.uid,
@@ -76,7 +76,7 @@ const useFireBaseAuth = () => {
           emailVerified: credential.emailVerified
         }
         dispatch(adduser(user))
-        dispatch(islogin(true))
+        dispatch(isSignin())
         navigate('/shop');
       })
       .catch((error) => {

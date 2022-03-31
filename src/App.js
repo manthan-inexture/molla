@@ -14,7 +14,7 @@ function App() {
   useEffect(() => {
     dispatch(getData());
   }, []);
-  const data = useSelector((state) => state.product.data);
+  const data = useSelector((state) => state);
   console.log(data);
 
   return (
