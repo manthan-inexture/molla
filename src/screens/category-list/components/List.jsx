@@ -54,7 +54,11 @@ const List = ({ data }) => {
               </div>
               {/* End .product-cat */}
               <h3 className="product-title">
-                <a href="product.html">{title}</a>
+                < Link to = {
+                  `/product/${id}`
+                } > {
+                  title
+                } < / Link>
               </h3>
               {/* End .product-title */}
               <div className="product-content">
