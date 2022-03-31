@@ -10,11 +10,9 @@ import { BrowserRouter } from "react-router-dom";
 
 import { Provider } from "react-redux";
 
-import Admin from "./Admin";
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      {/* <Admin /> */}
       <App />
     </BrowserRouter>
   </Provider>,
