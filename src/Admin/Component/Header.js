@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Header = () => {
+  useEffect(() => {
+    var element = document.createElement("link");
+    element.type = "text/css";
+    element.rel = "stylesheet";
+    element.id = "adminCSS";
+    element.href = "/dist/css/adminlte.min.css";
+    console.log("asdas", element);
+
+    document.getElementsByTagName("head")[0].appendChild(element);
+
+    // return () => document.getElementById("adminCSS")?.remove();
+  }, []);
   return (
     <div>
       <nav className="main-header navbar navbar-expand navbar-white navbar-light">

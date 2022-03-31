@@ -9,6 +9,8 @@ import Starter from "./Admin/Component/Starter";
 import User from "./Admin/Component/User";
 
 // public
+import UserHeader from "./screens/components/header/Header";
+import UserFooter from "./screens/components/footer/footer";
 import Home from "../src/screens/home/home";
 import CategoryList from "../src/screens/category-list/CategoryList";
 import RegisterAndsignin from "../src/screens/signin-signup/RegisterAndsignin";
@@ -29,11 +31,22 @@ const Router = () => {
     <>
       <Routes>
         {/* public */}
-        <Route path="/" element={<Home />} />
-        <Route path="shop" element={<CategoryList />} />
-        <Route path="/shop/:category" element={<CategoryList />} />
-        <Route path="signin" element={<RegisterAndsignin />} />
-        <Route path="about" element={<About />} />
+        <Route
+          path="/"
+          element={
+            <>
+              <UserHeader />
+              <Outlet />
+              <UserFooter />
+            </>
+          }
+        >
+          <Route path="/" element={<Home />} />
+          <Route path="shop" element={<CategoryList />} />
+          <Route path="/shop/:category" element={<CategoryList />} />
+          <Route path="signin" element={<RegisterAndsignin />} />
+          <Route path="about" element={<About />} />
+        </Route>
 
         {/* private */}
         <Route path="/" element={<PrivateRoute islogin={islogin} />}>
