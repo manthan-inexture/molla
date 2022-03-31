@@ -1,11 +1,12 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { NavLink } from 'react-router-dom'
 
 function NewArrivals() {
   const AllProducts = useSelector(state => state.product.data)
   // console.log(AllProducts)
 
-  const currentProducts = AllProducts.slice(0,4)
+  const currentProducts = AllProducts.slice(0,8)
   // console.log(currentProducts)
   return (
     <div>
@@ -25,7 +26,6 @@ function NewArrivals() {
                <div className='col-md-3' key={product.id}>
              <div className="product product-2">
                 <figure className="product-media">
-  
 
                     <img style={{height: '200px'}} src={product.image} alt="Product image" className="product-image" />
               
@@ -39,7 +39,7 @@ function NewArrivals() {
                   <div className="product-cat">
                     <a href="#">{product.category}</a>
                   </div>{/* End .product-cat */}
-                  <h3 className="product-title"><a href="product.html">{product.title}</a></h3>{/* End .product-title */}
+                  <h3 className="product-title"><NavLink to={`/product/${product.id}`}>{product.title}</NavLink></h3>{/* End .product-title */}
                   <div className="product-price">
                     ${product.price}
                   </div>{/* End .product-price */}
