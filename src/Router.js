@@ -28,14 +28,6 @@ const Router = () => {
   return (
     <>
       <Routes>
-<<<<<<< HEAD
-        <Route path="/" element={<Starter />} />
-        <Route path="/products" element={<Product />} />
-        <Route path="/users" element={<User />} />
-        <Route path="/orders" element={<Order />} />
-        <Route path="*" element={<h1>404</h1>} />
-
-=======
         {/* public */}
         <Route path="/" element={<Home />} />
         <Route path="shop" element={<CategoryList />} />
@@ -46,7 +38,7 @@ const Router = () => {
         {/* private */}
         <Route path="/" element={<PrivateRoute islogin={islogin} />}>
           <Route path="contact" element={<Contact />} />
-          <Route path="product" element={<ProductView />} />
+          <Route path="product/:productId" element={<ProductView />} />
           <Route path="checkout" element={<Checkout />} />
           <Route path="viewcart" element={<Cart />} />
         </Route>
@@ -68,7 +60,6 @@ const Router = () => {
         </Route>
 
         <Route path="*" element={<Errors />} />
->>>>>>> e177296fb9fee1c7af4d608eb6e9d7235ee835f1
       </Routes>
     </>
   );
