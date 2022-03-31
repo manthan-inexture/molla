@@ -1,21 +1,21 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const List = ({product}) => {
-  const {id, title, category, description, image, price, rating} = product;
- 
+const List = ({ data }) => {
+  const { id, title, category, image, rating, description, price } = data;
   return (
     <div>
       <div className="product product-list">
         <div className="row">
           <div className="col-6 col-lg-3">
             <figure className="product-media">
-              <a href="product.html">
+              <Link to={`/product/${id}`}>
                 <img
                   src={image}
                   alt="Product image"
                   className="product-image"
                 />
-              </a>
+              </Link>
             </figure>
             {/* End .product-media */}
           </div>
@@ -35,6 +35,14 @@ const List = ({product}) => {
                 </div>
                 {/* End .ratings */}
                 <span className="ratings-text">( {rating.count} Reviews )</span>
+                  <div
+                    className="ratings-val"
+                    style={{ width: `${rating.rate * 20}%` }}
+                  />
+                  {/* End .ratings-val */}
+                </div>
+                {/* End .ratings */}
+                <span className="ratings-text">( {rating.rate} rating )</span>
               </div>
               {/* End .rating-container */}
 
@@ -57,9 +65,7 @@ const List = ({product}) => {
               </h3>
               {/* End .product-title */}
               <div className="product-content">
-                <p>
-                  {description}
-                </p>
+                <p>{description}</p>
               </div>
               {/* End .product-content */}
             </div>
@@ -69,7 +75,7 @@ const List = ({product}) => {
         </div>
         {/* End .row */}
       </div>
-    </div>
+    
   );
 };
 

@@ -1,9 +1,8 @@
 import React from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation} from "react-router-dom";
 import BrowseCategory from "./BrowseCategory";
-
 function HeaderCenter() {
-  const location = useLocation();
+  const location =useLocation()
   return (
     <div className="sticky-wrapper" style={{}}>
       <div
@@ -12,7 +11,12 @@ function HeaderCenter() {
       >
         <div className="container">
           <div className="header-left">
-            {location.pathname.includes('/shop') && <BrowseCategory />}
+          {location.pathname == '/shop' && <BrowseCategory />}
+          { location.pathname == "/shop/men's%20clothing" && <BrowseCategory />}
+          { location.pathname == "/shop/women's%20clothing" && <BrowseCategory />}
+          { location.pathname == "/shop/jewelery" && <BrowseCategory />}
+          { location.pathname == "/shop/electronics" && <BrowseCategory />}
+          { location.pathname == "/shop/all" && <BrowseCategory />}
             {/* End .category-dropdown */}
           </div>
           {/* End .header-left */}

@@ -11,8 +11,8 @@ const PageNav = ({ productPerPage, totalProducts, paginate }) => {
     <nav aria-label="Page navigation">
       <ul className="pagination">
       
-        {pageNumber.map((number, index) => (
-          <li key={index} onClick={() => paginate(number)} className="page-item active" aria-current="page">
+        {pageNumber.map(number => (
+          <li onClick={() => paginate(number)} className="page-item active" aria-current="page">
           <a className="page-link" href="#">
             {number}
           </a>

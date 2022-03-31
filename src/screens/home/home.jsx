@@ -1,4 +1,6 @@
-import React from 'react'
+import React, {
+  useEffect
+} from 'react'
 import Carosol from "./components/Carosol.jsx";
 import PupularCategories from "./components/PupularCategories.jsx";
 import PupularDeales from "./components/PupularDeales.jsx";
@@ -10,6 +12,7 @@ import Services from "./components/Services.jsx";
 
 import Latestdeal from "./components/latestdeal.jsx";
 function Home() {
+
   return (
     <>
       <div className="page-wrapper">

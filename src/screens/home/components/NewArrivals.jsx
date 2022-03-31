@@ -1,16 +1,13 @@
-import React,{ useState } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
-import Product from './Product'
+import { NavLink } from 'react-router-dom'
 
 function NewArrivals() {
-  const AllProducts = useSelector(state => state.fetchReducer.data);
-  //pagination
-  const [currentPage,setCurrentPage] = useState(1);
-  const productPerPage = 5;
-  const indexOfLastProduct = currentPage * productPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productPerPage;
-  const currentProducts = AllProducts.slice(indexOfFirstProduct, indexOfLastProduct);
-  const paginate =(number) => setCurrentPage(number)
+  const AllProducts = useSelector(state => state.product.data)
+  // console.log(AllProducts)
+
+  const currentProducts = AllProducts.slice(0,8)
+  // console.log(currentProducts)
   return (
     <div>
            <div className="container new-arrivals">
@@ -18,37 +15,53 @@ function NewArrivals() {
           <div className="heading-left">
             <h2 className="title">New Arrivals</h2>{/* End .title */}
           </div>{/* End .heading-left */}
-          <div className="heading-right">
-            <ul className="nav nav-pills nav-border-anim justify-content-center" role="tablist">
-              <li className="nav-item">
-                <a className="nav-link active" id="new-all-link" data-toggle="tab" href="#new-all-tab" role="tab" aria-controls="new-all-tab" aria-selected="true">All</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" id="new-tv-link" data-toggle="tab" href="#new-tv-tab" role="tab" aria-controls="new-tv-tab" aria-selected="false">MAN</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" id="new-computers-link" data-toggle="tab" href="#new-computers-tab" role="tab" aria-controls="new-computers-tab" aria-selected="false">WOMEN</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" id="new-phones-link" data-toggle="tab" href="#new-phones-tab" role="tab" aria-controls="new-phones-tab" aria-selected="false">JEWELLERY</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" id="new-watches-link" data-toggle="tab" href="#new-watches-tab" role="tab" aria-controls="new-watches-tab" aria-selected="false">ELECTRONICS</a>
-              </li>
-            </ul>
-          </div>{/* End .heading-right */}
+         
         </div>{/* End .heading */}
 
         <div className="tab-content tab-content-carousel just-action-icons-sm">
           <div className="tab-pane p-0 fade show active" id="new-all-tab" role="tabpanel" aria-labelledby="new-all-link">
-              {currentProducts.map((product,key) => {
-                return <Product product={product} />
-              })}
-          
+           <div className='row'>
+             {currentProducts.map(product => (
+               <>
+               <div className='col-md-3' key={product.id}>
+             <div className="product product-2">
+                <figure className="product-media">
+
+                    <img style={{height: '200px'}} src={product.image} alt="Product image" className="product-image" />
+              
+                  
+                  <div className="product-action">
+                    <a href="#" className="btn-product btn-cart" title="Add to cart"><span>add to cart</span></a>
+                  </div>{/* End .product-action */}
+
+                </figure>{/* End .product-media */}
+                <div className="product-body">
+                  <div className="product-cat">
+                    <a href="#">{product.category}</a>
+                  </div>{/* End .product-cat */}
+                  <h3 className="product-title"><NavLink to={`/product/${product.id}`}>{product.title}</NavLink></h3>{/* End .product-title */}
+                  <div className="product-price">
+                    ${product.price}
+                  </div>{/* End .product-price */}
+                  <div className="ratings-container">
+                    <div className="ratings">
+                      <div className="ratings-val" style={{width: `${product.rating.rate * 20}%`}} />{/* End .ratings-val */}
+                      {product.rating.rate}
+                    </div>{/* End .ratings */}
+                    <span className="ratings-text">( {product.rating.count} Reviews )</span>
+                  </div>{/* End .rating-container */}
+                </div>{/* End .product-body */}
+              </div>{/* End .product */}
+             </div>
+              
+               </>
+              
+             ))}
+             
+            </div>
+            
           </div>{/* .End .tab-pane */}
-       
-       
-     
+         
         </div>{/* End .tab-content */}
       </div>{/* End .container */}
 
