@@ -5,19 +5,24 @@ import * as Yup from "yup";
 import { updateData } from "./redux/Product/productAction";
 
 const validationSchema = Yup.object({
-  title: Yup.string().required("Required"),
-  description: Yup.string().required("Required"),
-  category: Yup.string().required("Required"),
-  price: Yup.string().required("Required"),
-  rate: Yup.string().required("Required"),
-  count: Yup.string().required("Required"),
-  image: Yup.string().required("Required"),
+  title: Yup.string().required("Please Enter Title"),
+  description: Yup.string().required("Please Enter Description"),
+  category: Yup.string().required("Please Enter Category"),
+  price: Yup.string()
+    .required("Please Enter Price")
+    .matches(/^[1-9]\d*(\.\d+)?$/, "Please enter Numbers only"),
+  rate: Yup.string()
+    .required("Please Enter Rate")
+    .matches(/^[0-4]{1}[.][0-9]{1}$/, "Please enter Numbers only"),
+  count: Yup.string()
+    .required("Please Enter Count")
+    .matches(/^[0-9]+$/, "Please enter Numbers only"),
 });
 
 const UpdateForm = (data) => {
+  console.log(data.data.image, data.i);
   const dispatch = useDispatch();
-
-  const [displayimage, setDisplayImage] = useState(data.data.image);
+  const [displayimage, setDisplayImage] = useState(null);
 
   const initialValues = {
     title: data.data.title,
@@ -26,19 +31,32 @@ const UpdateForm = (data) => {
     price: data.data.price,
     rate: data.data.rating.rate,
     count: data.data.rating.count,
-    image: "",
+    image: data.data.image,
   };
   const onSubmit = (values) => {
-    console.log("updated data", values, "id", data.data.id);
-    dispatch(updateData(values, data.data.id));
+    let updatedvalues;
+    if (displayimage) {
+      updatedvalues = { ...values, image: displayimage };
+    } else {
+      updatedvalues = values;
+    }
+    console.log(updatedvalues);
+    // console.log("updated data", values, "id", data.data.id);
+    dispatch(updateData(updatedvalues, data.data.id));
+    setDisplayImage(null);
   };
-
   const formik2 = useFormik({
     initialValues,
     enableReinitialize: true,
     onSubmit,
     validationSchema,
   });
+
+  const handlefilechange = (e) => {
+    formik2.values.image = URL.createObjectURL(e.target.files[0]);
+    setDisplayImage(formik2.values.image);
+    // console.log("hello", formik2.values.image);
+  };
   // console.log(formik2.initialValues);
   // console.log(formik2.errors);
   return (
@@ -56,7 +74,7 @@ const UpdateForm = (data) => {
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title" id="exampleModalLabel">
-                  Update Data
+                  Update This Product
                 </h5>
                 <button
                   type="button"
@@ -70,29 +88,30 @@ const UpdateForm = (data) => {
                   <div className="col-md-6">
                     <div className="mb-3">
                       <label htmlFor="title" className="form-label">
-                        title
+                        Title
                       </label>
                       <input
                         type="text"
                         className="form-control"
                         id="title"
                         name="title"
+                        placeholder="Title"
                         onChange={formik2.handleChange}
                         onBlur={formik2.handleBlur}
                         value={formik2.values.title}
                       />
                       {formik2.errors.title && formik2.touched.title ? (
-                        <p>{formik2.errors.title}</p>
+                        <p style={{ color: "red" }}>{formik2.errors.title}</p>
                       ) : null}
                     </div>
                     <div className="mb-3">
                       <label htmlFor="description" className="form-label">
-                        description
+                        Description
                       </label>
 
                       <textarea
                         className="form-control"
-                        placeholder="Leave a comment here"
+                        placeholder="Description"
                         id="description"
                         name="description"
                         onChange={formik2.handleChange}
@@ -100,13 +119,15 @@ const UpdateForm = (data) => {
                         value={formik2.values.description}
                       ></textarea>
                       {formik2.errors.description &&
-                      formik2.touched.description ? (
-                        <p>{formik2.errors.description}</p>
+                        formik2.touched.description ? (
+                          <p style={{ color: "red" }}>
+                            {formik2.errors.description}
+                          </p>
                       ) : null}
                     </div>
                     <div className="mb-3">
                       <label htmlFor="category" className="form-label">
-                        category
+                        Category
                       </label>
                       <select
                         className="form-select"
@@ -116,7 +137,7 @@ const UpdateForm = (data) => {
                         onBlur={formik2.handleBlur}
                         value={formik2.values.category}
                       >
-                        <option selected>Open this select menu</option>
+                        <option value="">Select one Category</option>
                         <option value="men's clothing">Men's Clothing</option>
                         <option value="jewelery">Jewelery</option>
                         <option value="electronics">Electronics</option>
@@ -125,43 +146,51 @@ const UpdateForm = (data) => {
                         </option>
                       </select>
                       {formik2.errors.category && formik2.touched.category ? (
-                        <p>{formik2.errors.category}</p>
+                        <p style={{ color: "red" }}>
+                          {formik2.errors.category}
+                        </p>
                       ) : null}
                     </div>
                     <div className="row">
                       <div className="col-md-6">
                         <div className="mb-3">
                           <label htmlFor="rate" className="form-label">
-                            rate
+                            Rate
                           </label>
                           <input
                             type="text"
                             className="form-control"
                             id="rate"
+                            placeholder="Rate"
                             onChange={formik2.handleChange}
                             onBlur={formik2.handleBlur}
                             value={formik2.values.rate}
                           />
                           {formik2.errors.rate && formik2.touched.rate ? (
-                            <p>{formik2.errors.rate}</p>
+                            <p style={{ color: "red" }}>
+                              {formik2.errors.rate}
+                            </p>
                           ) : null}
                         </div>
                       </div>
                       <div className="col-md-6">
                         <div className="mb-3">
                           <label htmlFor="count" className="form-label">
-                            count
+                            Count
                           </label>
                           <input
                             type="text"
                             className="form-control"
                             id="count"
+                            placeholder="Count"
                             onChange={formik2.handleChange}
                             onBlur={formik2.handleBlur}
                             value={formik2.values.count}
                           />
                           {formik2.errors.count && formik2.touched.count ? (
-                            <p>{formik2.errors.count}</p>
+                            <p style={{ color: "red" }}>
+                              {formik2.errors.count}
+                            </p>
                           ) : null}
                         </div>
                       </div>
@@ -172,18 +201,21 @@ const UpdateForm = (data) => {
                       <div className="col-md-6">
                         <div className="mb-3">
                           <label htmlFor="price" className="form-label">
-                            price
+                            Price
                           </label>
                           <input
                             type="text"
                             className="form-control"
                             id="price"
+                            placeholder="Price"
                             onChange={formik2.handleChange}
                             onBlur={formik2.handleBlur}
                             value={formik2.values.price}
                           />
                           {formik2.errors.price && formik2.touched.price ? (
-                            <p>{formik2.errors.price}</p>
+                            <p style={{ color: "red" }}>
+                              {formik2.errors.price}
+                            </p>
                           ) : null}
                         </div>
                       </div>
@@ -196,12 +228,13 @@ const UpdateForm = (data) => {
                             type="file"
                             className="form-control"
                             id="image"
-                            onChange={formik2.handleChange}
-                            onBlur={formik2.handleBlur}
-                            value={formik2.values.image}
+                            name="image"
+                            onChange={(e) => handlefilechange(e)}
                           />
                           {formik2.errors.image && formik2.touched.image ? (
-                            <p>{formik2.errors.image}</p>
+                            <p style={{ color: "red" }}>
+                              {formik2.errors.image}
+                            </p>
                           ) : null}
                         </div>
                       </div>
@@ -218,8 +251,8 @@ const UpdateForm = (data) => {
                         }}
                       >
                         <img
-                          src={displayimage}
-                          alt={displayimage}
+                          src={displayimage ? displayimage : data.data.image}
+                          alt={data.data.image}
                           style={{
                             width: "100%",
                             height: "100%",
@@ -242,9 +275,9 @@ const UpdateForm = (data) => {
                 <button
                   type="submit"
                   className="btn btn-primary"
-                  // data-bs-dismiss="modal"
+                // data-bs-dismiss="modal"
                 >
-                  Update Product
+                  Update This Product
                 </button>
               </div>
             </div>

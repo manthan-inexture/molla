@@ -15,7 +15,6 @@ function TopHeader() {
   const handlelogout = () => {
     // dispatch(isNotSignin());
     localStorage.setItem("islogin", false);
-
     navigate('/signin');
   }
   const islogin = useSelector((state) => state.usersignin.isauth);

@@ -34,6 +34,7 @@ export const deleteData = (id) => {
 export const updateData = (upadteddata, id) => {
   console.log(upadteddata, id);
   var updatenew = {
+    id: id,
     title: upadteddata.title,
     price: upadteddata.price,
     description: upadteddata.description,
@@ -63,13 +64,13 @@ export const addData = (product, id) => {
   var newdata = {
     id: id,
     title: product.title,
-    price: product.price,
+    price: parseFloat(product.price),
     description: product.description,
     category: product.category,
     image: product.image,
     rating: {
-      rate: product.rate,
-      count: product.count,
+      rate: parseFloat(product.rate),
+      count: parseInt(product.count),
     },
   };
   console.log(newdata);

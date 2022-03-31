@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 const About = () => {
   return (
@@ -18,11 +19,10 @@ const About = () => {
           <div className="container">
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
-                <a href="index.html">Home</a>
+                <NavLink className="breadcrumb-item" to="/">Home</NavLink>
               </li>
-
               <li className="breadcrumb-item active" aria-current="page">
-                About us
+                <NavLink className="breadcrumb-item" to="/about">About</NavLink>
               </li>
             </ol>
           </div>

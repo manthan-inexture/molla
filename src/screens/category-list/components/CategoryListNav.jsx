@@ -13,9 +13,6 @@ const CategoryListNav = (props) => {
             <li className="breadcrumb-item">
             <NavLink  className="breadcrumb-item" to="/shop">shop</NavLink>
             </li>
-            <li className="breadcrumb-item active" aria-current="page">
-              List
-            </li>
           </ol>
         </div>
         {/* End .container */}

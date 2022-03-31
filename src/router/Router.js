@@ -38,6 +38,7 @@ const Router = () => {
         <Route path="checkout" element={<Checkout />} />
         <Route path="viewcart" element={<Cart />} />
         <Route path="product/:productId" element={<ProductView />} />
+
       </Route>
       <Route path="*" element={<Errors />} />
     </Routes>

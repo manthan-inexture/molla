@@ -1,8 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { addToCart, getProductData } from "../../../redux/cart/cartAction";
+import { useDispatch, useSelector } from "react-redux";
 
 const List = ({ data }) => {
+
+
   const { id, title, category, image, rating, description, price } = data;
+
+  const dispatch = useDispatch();
+
+  const productData = useSelector((state) => state.product.data);
+  console.log(productData);
+
+  useEffect(() => {
+    dispatch(getProductData(productData))
+  }, [])
+
+  const handleClick = (id, title) => {
+    alert(`${title} added to cart`)
+    dispatch(addToCart(id))
+  }
+
   return (
     <div>
       <div className="product product-list">
@@ -41,7 +60,7 @@ const List = ({ data }) => {
 
               {/* End .product-action */}
               <a href="#" className="btn-product btn-cart">
-                <span>add to cart</span>
+                <span onClick={() => handleClick(id, title)}>add to cart</span>
               </a>
             </div>
             {/* End .product-list-action */}
@@ -54,7 +73,11 @@ const List = ({ data }) => {
               </div>
               {/* End .product-cat */}
               <h3 className="product-title">
-                <a href="product.html">{title}</a>
+                < Link to = {
+                  `/product/${id}`
+                } > {
+                  title
+                  } </ Link>
               </h3>
               {/* End .product-title */}
               <div className="product-content">
