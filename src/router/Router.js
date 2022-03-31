@@ -35,15 +35,10 @@ const Router = () => {
       {/* private */}
       <Route path="/" element={<PrivateRoute islogin={islogin} />}>
         <Route path="contact" element={<Contact />} />
-<<<<<<< HEAD
         <Route path="checkout" element={<Checkout />} />
         <Route path="viewcart" element={<Cart />} />
         <Route path="product/:productId" element={<ProductView />} />
-=======
-        <Route path="product" element={<ProductView />} />
-        <Route path="checkout" element={<Checkout />} />
-        <Route path="viewcart" element={<Cart />} />
->>>>>>> e177296fb9fee1c7af4d608eb6e9d7235ee835f1
+
       </Route>
       <Route path="*" element={<Errors />} />
     </Routes>

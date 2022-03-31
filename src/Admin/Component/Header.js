@@ -31,7 +31,11 @@ const Header = () => {
           </li>
         </ul>
         {/* Right navbar links */}
-        <ul className="navbar-nav ml-auto">{/* Navbar Search */}</ul>
+        <ul className="navbar-nav ml-auto">
+          <button type="button" class="btn btn-outline-primary mr-2 mt-1 mb-1">
+            Log Out
+          </button>
+        </ul>
       </nav>
       {/* /.navbar */}
       {/* Main Sidebar Container */}

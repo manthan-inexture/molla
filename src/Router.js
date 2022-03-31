@@ -30,32 +30,21 @@ const Router = () => {
   return (
     <>
       <Routes>
-        {/* public */}
-        <Route
-          path="/"
-          element={
-            <>
-              <UserHeader />
-              <Outlet />
-              <UserFooter />
-            </>
-          }
-        >
+        <Route path="/" element={<> <UserHeader /> <Outlet /> <UserFooter /> </>}>
+          {/* public */}
           <Route path="/" element={<Home />} />
           <Route path="shop" element={<CategoryList />} />
           <Route path="/shop/:category" element={<CategoryList />} />
           <Route path="signin" element={<RegisterAndsignin />} />
           <Route path="about" element={<About />} />
-        </Route>
-
-        {/* private */}
-        <Route path="/" element={<PrivateRoute islogin={islogin} />}>
-          <Route path="contact" element={<Contact />} />
           <Route path="product/:productId" element={<ProductView />} />
+          <Route path="contact" element={<Contact />} />
+        {/* private */}
+          <Route path="/" element={<PrivateRoute islogin={islogin} />}>
           <Route path="checkout" element={<Checkout />} />
           <Route path="viewcart" element={<Cart />} />
         </Route>
-
+        </Route>
         <Route
           path="/admin"
           element={

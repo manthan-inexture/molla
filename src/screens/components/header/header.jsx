@@ -10,12 +10,13 @@ function Header() {
 
   return (<>
     <header className="header header-intro-clearance header-4">
-      <TopHeader />
+      {/* <div className="py-3"></div> */}
       <HeaderMiddle />
+      <TopHeader />
       <HeaderCenter />
     </header>
     <MobileMenu />
-    </>
+  </>
   );
 }
 
