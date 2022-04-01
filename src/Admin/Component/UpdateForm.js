@@ -10,17 +10,10 @@ const validationSchema = Yup.object({
   category: Yup.string().required("Please Enter Category"),
   price: Yup.string()
     .required("Please Enter Price")
-<<<<<<< HEAD
-    .matches(/^[0-9]+.[0-9]+$/, "Please enter Numbers only"),
-  rate: Yup.string()
-    .required("Please Enter Rate")
-    .matches(/^[0-4]{1}.[0-9]{1}$/, "Please enter Numbers only"),
-=======
     .matches(/^[1-9]\d*(\.\d+)?$/, "Please enter Numbers only"),
   rate: Yup.string()
     .required("Please Enter Rate")
     .matches(/^[0-4]{1}[.][0-9]{1}$/, "Please enter Numbers only"),
->>>>>>> 9b5f1bb0a915712274b96c9331dc5e388c8aa29f
   count: Yup.string()
     .required("Please Enter Count")
     .matches(/^[0-9]+$/, "Please enter Numbers only"),
@@ -38,14 +31,6 @@ const UpdateForm = (data) => {
     price: data.data.price,
     rate: data.data.rating.rate,
     count: data.data.rating.count,
-<<<<<<< HEAD
-  };
-  const onSubmit = (values) => {
-    const updatedvalues = { ...values, image: displayimage };
-    console.log(updatedvalues);
-    // console.log("updated data", values, "id", data.data.id);
-    dispatch(updateData(updatedvalues, data.data.id));
-=======
     image: data.data.image,
   };
   const onSubmit = (values) => {
@@ -59,7 +44,6 @@ const UpdateForm = (data) => {
     // console.log("updated data", values, "id", data.data.id);
     dispatch(updateData(updatedvalues, data.data.id));
     setDisplayImage(null);
->>>>>>> 9b5f1bb0a915712274b96c9331dc5e388c8aa29f
   };
   const formik2 = useFormik({
     initialValues,
@@ -135,17 +119,10 @@ const UpdateForm = (data) => {
                         value={formik2.values.description}
                       ></textarea>
                       {formik2.errors.description &&
-<<<<<<< HEAD
-                      formik2.touched.description ? (
-                        <p style={{ color: "red" }}>
-                          {formik2.errors.description}
-                        </p>
-=======
                         formik2.touched.description ? (
                           <p style={{ color: "red" }}>
                             {formik2.errors.description}
                           </p>
->>>>>>> 9b5f1bb0a915712274b96c9331dc5e388c8aa29f
                       ) : null}
                     </div>
                     <div className="mb-3">
