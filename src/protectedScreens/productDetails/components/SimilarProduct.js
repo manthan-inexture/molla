@@ -16,17 +16,12 @@ const SimilarProduct = () => {
   // similar product functionality
   const productFilter = data?.filter((items, index) => items.id == productId);
   var product = data?.filter((value, index) => value.id == productId);
-  console.log(product);
 
   var similarProduct = data?.filter((value, index) => {
-    console.log(value.category);
-    console.log("v id ", value.id);
-    console.log(productId);
     return (
       value.category == productFilter[0]?.category && value.id != productId
     );
   });
-  console.log(similarProduct);
 
   return (
     <>

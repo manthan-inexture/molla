@@ -1,12 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Search from "./Search";
+import { useSelector, useDispatch } from "react-redux"
+import { removeToCart } from "../../../../redux/cart/cartAction";
 
 function HeaderMiddle() {
-
+  const [count, setCount] = useState(0);
+  const [price, setPrice] = useState(0);
+  const { cart } = useSelector((state) => state.cardItems);
+  const dispatch = useDispatch();
+  const removeItem = (id) => {
+    console.log(id);
+    dispatch(removeToCart(id));
+  }
+  useEffect(() => {
+    console.log(cart);
+    let cartCount = 0;
+    let price = 0;
+    cart.map((e) => {
+      cartCount += e.qty;
+      price += e.qty * e.price
+    })
+    setPrice(price)
+    setCount(cartCount)
+  }, [cart])
+  console.log(cart);
   return (
     <div>
-      <div className="header-middle">
+      <div className="header-middle sticky-header  bg-white">
         <div className="container">
           <div className="header-left">
             <button className="mobile-menu-toggler">
@@ -42,67 +62,52 @@ function HeaderMiddle() {
               >
                 <div className="icon">
                   <i className="icon-shopping-cart" />
-                  <span className="cart-count">2</span>
+                  <span className="cart-count">{count}</span>
                 </div>
                 <p>Cart</p>
               </a>
               <div className="dropdown-menu dropdown-menu-right">
                 <div className="dropdown-cart-products">
-                  <div className="product">
-                    <div className="product-cart-details">
-                      <h4 className="product-title">
-                        <a href="product.html">
-                          Beige knitted elastic runner shoes
-                        </a>
-                      </h4>
-                      <span className="cart-product-info">
-                        <span className="cart-product-qty">1</span>x $84.00
-                      </span>
-                    </div>
-                    {/* End .product-cart-details */}
-                    <figure className="product-image-container">
-                      <a href="product.html" className="product-image">
-                        <img
-                          src="assets/images/products/cart/product-1.jpg"
-                          alt="product"
-                        />
-                      </a>
-                    </figure>
-                    <a href="#" className="btn-remove" title="Remove Product">
-                      <i className="icon-close" />
-                    </a>
-                  </div>
-                  {/* End .product */}
-                  <div className="product">
-                    <div className="product-cart-details">
-                      <h4 className="product-title">
-                        <a href="product.html">
-                          Blue utility pinafore denim dress
-                        </a>
-                      </h4>
-                      <span className="cart-product-info">
-                        <span className="cart-product-qty">1</span>x $76.00
-                      </span>
-                    </div>
-                    {/* End .product-cart-details */}
-                    <figure className="product-image-container">
-                      <a href="product.html" className="product-image">
-                        <img
-                          src="assets/images/products/cart/product-2.jpg"
-                          alt="product"
-                        />
-                      </a>
-                    </figure>
-                    <a href="#" className="btn-remove" title="Remove Product">
-                      <i className="icon-close" />
-                    </a>
-                  </div>
+
+                  {cart.map((data) => {
+                    return (
+                      <>
+                        <div className="product">
+                          <div className="product-cart-details">
+                            <h4 className="product-title">
+                              <a href="product.html">
+                                {data.title}
+                              </a>
+                            </h4>
+                            <span className="cart-product-info">
+                              <span className="cart-product-qty">{data.qty}</span>x ${data.price}
+                            </span>
+                          </div>
+                          {/* End .product-cart-details */}
+                          <figure className="product-image-container">
+                            <a href="product.html" className="product-image">
+                              <img
+                                src={data.image}
+                                alt="product"
+                              />
+                            </a>
+                          </figure>
+                          <a href="#" className="btn-remove" title="Remove Product">
+                            <i className="icon-close" onClick={() => removeItem(data.id)} />
+                          </a>
+                        </div>
+                      </>
+                    )
+                  })
+
+                  }
+
                   {/* End .product */}
                 </div>
                 {/* End .cart-product */}
                 <div className="dropdown-cart-total">
                   <span>Total</span>
-                  <span className="cart-total-price">$160.00</span>
+                  <span className="cart-total-price">${price.toFixed(2)}</span>
                 </div>
                 {/* End .dropdown-cart-total */}
                 <div className="dropdown-cart-action">

@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { NavLink } from "react-router-dom";
 
 const Contact = () => {
   const { register, handleSubmit } = useForm();
@@ -7,7 +8,7 @@ const Contact = () => {
   const onSubmit = (data) => {
     console.log(data);
     localStorage.setItem(
-      "contact_form_data",
+      "contact_form_data",  
       window.btoa(JSON.stringify(data))
     );
   };
@@ -15,14 +16,21 @@ const Contact = () => {
   return (
     <>
       <main className="main">
+
+        <div
+          className="page-header text-center"
+          style={{ backgroundImage: 'url("assets/images/page-header-bg.jpg")' }}
+        >
+          <div className="container">
+            <h1 className="page-title">Contact us</h1>
+          </div>
+          {/* End .container */}
+        </div>
         <nav aria-label="breadcrumb" className="breadcrumb-nav border-0 mb-0">
           <div className="container">
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
-                <a href="index.html">Home</a>
-              </li>
-              <li className="breadcrumb-item">
-                <a href="#">Pages</a>
+                <NavLink className="breadcrumb-item" to="/">Home</NavLink>
               </li>
               <li className="breadcrumb-item active" aria-current="page">
                 Contact us
@@ -32,21 +40,7 @@ const Contact = () => {
           {/* End .container */}
         </nav>
         {/* End .breadcrumb-nav */}
-        <div className="container">
-          <div
-            className="page-header page-header-big text-center"
-            style={{
-              backgroundImage: 'url("assets/images/contact-header-bg.jpg")',
-            }}
-          >
-            <h1 className="page-title text-white">
-              Contact us
-              <span className="text-white">keep in touch with us</span>
-            </h1>
-          </div>
-          {/* End .page-header */}
-        </div>
-        {/* End .container */}
+
         <div className="page-content pb-0">
           <div className="container">
             <div className="row">

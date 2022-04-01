@@ -7,7 +7,7 @@ function HeaderCenter() {
   return (
     <div className="sticky-wrapper" style={{}}>
       <div
-        className="header-bottom sticky-header"
+        className="header-bottom "
         style={{ paddingRight: "0px" }}
       >
         <div className="container">
@@ -33,9 +33,6 @@ function HeaderCenter() {
                 {/*shop-nav-bar-btn */}
                  <li className="megamenu-container">
                   <NavLink to="/shop" >Shop</NavLink>
-                </li>
-               <li className="megamenu-container">
-                  <NavLink to="/product" >Product</NavLink>
                 </li>
 
                   <li className="megamenu-container">

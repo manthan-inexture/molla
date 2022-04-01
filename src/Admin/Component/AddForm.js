@@ -22,10 +22,10 @@ const validationSchema = Yup.object({
   category: Yup.string().required("Please Enter Category"),
   price: Yup.string()
     .required("Please Enter Price")
-    .matches(/^[0-9]+.[0-9]+$/, "Please enter Numbers only"),
+    .matches(/^[1-9]\d*(\.\d+)?$/, "Please enter Numbers only"),
   rate: Yup.string()
     .required("Please Enter Rate")
-    .matches(/^[0-4]{1}.[0-9]{1}$/, "Please enter Numbers only"),
+    .matches(/^[0-4]{1}[.][0-9]{1}$/, "Please enter Numbers only"),
   count: Yup.string()
     .required("Please Enter Count")
     .matches(/^[0-9]+$/, "Please enter Numbers only"),
@@ -120,10 +120,10 @@ const AddForm = () => {
                         value={formik.values.description}
                       ></textarea>
                       {formik.errors.description &&
-                      formik.touched.description ? (
-                        <p style={{ color: "red" }}>
-                          {formik.errors.description}
-                        </p>
+                        formik.touched.description ? (
+                          <p style={{ color: "red" }}>
+                            {formik.errors.description}
+                          </p>
                       ) : null}
                     </div>
                     <div className="mb-3">
@@ -273,7 +273,7 @@ const AddForm = () => {
                 <button
                   type="submit"
                   className="btn btn-primary"
-                  // data-bs-dismiss="modal"
+                // data-bs-dismiss="modal"
                 >
                   Add Product
                 </button>

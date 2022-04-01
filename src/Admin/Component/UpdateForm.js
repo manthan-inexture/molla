@@ -10,19 +10,26 @@ const validationSchema = Yup.object({
   category: Yup.string().required("Please Enter Category"),
   price: Yup.string()
     .required("Please Enter Price")
+<<<<<<< HEAD
     .matches(/^[0-9]+.[0-9]+$/, "Please enter Numbers only"),
   rate: Yup.string()
     .required("Please Enter Rate")
     .matches(/^[0-4]{1}.[0-9]{1}$/, "Please enter Numbers only"),
+=======
+    .matches(/^[1-9]\d*(\.\d+)?$/, "Please enter Numbers only"),
+  rate: Yup.string()
+    .required("Please Enter Rate")
+    .matches(/^[0-4]{1}[.][0-9]{1}$/, "Please enter Numbers only"),
+>>>>>>> 9b5f1bb0a915712274b96c9331dc5e388c8aa29f
   count: Yup.string()
     .required("Please Enter Count")
     .matches(/^[0-9]+$/, "Please enter Numbers only"),
 });
 
 const UpdateForm = (data) => {
+  console.log(data.data.image, data.i);
   const dispatch = useDispatch();
-
-  const [displayimage, setDisplayImage] = useState(data.data.image);
+  const [displayimage, setDisplayImage] = useState(null);
 
   const initialValues = {
     title: data.data.title,
@@ -31,12 +38,28 @@ const UpdateForm = (data) => {
     price: data.data.price,
     rate: data.data.rating.rate,
     count: data.data.rating.count,
+<<<<<<< HEAD
   };
   const onSubmit = (values) => {
     const updatedvalues = { ...values, image: displayimage };
     console.log(updatedvalues);
     // console.log("updated data", values, "id", data.data.id);
     dispatch(updateData(updatedvalues, data.data.id));
+=======
+    image: data.data.image,
+  };
+  const onSubmit = (values) => {
+    let updatedvalues;
+    if (displayimage) {
+      updatedvalues = { ...values, image: displayimage };
+    } else {
+      updatedvalues = values;
+    }
+    console.log(updatedvalues);
+    // console.log("updated data", values, "id", data.data.id);
+    dispatch(updateData(updatedvalues, data.data.id));
+    setDisplayImage(null);
+>>>>>>> 9b5f1bb0a915712274b96c9331dc5e388c8aa29f
   };
   const formik2 = useFormik({
     initialValues,
@@ -112,10 +135,17 @@ const UpdateForm = (data) => {
                         value={formik2.values.description}
                       ></textarea>
                       {formik2.errors.description &&
+<<<<<<< HEAD
                       formik2.touched.description ? (
                         <p style={{ color: "red" }}>
                           {formik2.errors.description}
                         </p>
+=======
+                        formik2.touched.description ? (
+                          <p style={{ color: "red" }}>
+                            {formik2.errors.description}
+                          </p>
+>>>>>>> 9b5f1bb0a915712274b96c9331dc5e388c8aa29f
                       ) : null}
                     </div>
                     <div className="mb-3">
@@ -244,8 +274,8 @@ const UpdateForm = (data) => {
                         }}
                       >
                         <img
-                          src={displayimage}
-                          alt={displayimage}
+                          src={displayimage ? displayimage : data.data.image}
+                          alt={data.data.image}
                           style={{
                             width: "100%",
                             height: "100%",
@@ -268,7 +298,7 @@ const UpdateForm = (data) => {
                 <button
                   type="submit"
                   className="btn btn-primary"
-                  // data-bs-dismiss="modal"
+                // data-bs-dismiss="modal"
                 >
                   Update This Product
                 </button>

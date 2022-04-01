@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getData } from "../../../Admin/Component/redux/Product/productAction";
+import { addToCart } from "../../../redux/cart/cartAction";
 
 const StickyBar = () => {
   const { productId } = useParams();
@@ -10,6 +11,10 @@ const StickyBar = () => {
   useEffect(() => {
     dispatch(getData());
   }, []);
+  const handleClick = (id, title) => {
+    alert(`${title} added to cart`)
+    dispatch(addToCart(id))
+  }
   return (
     <>
       {data.map((product, i) =>
@@ -29,22 +34,10 @@ const StickyBar = () => {
                 </div>
                 <div className="col-6 justify-content-">
                   <div className="product-price">${product.price}</div>
-                  <div className="product-details-quantity">
-                    <input
-                      type="number"
-                      id="sticky-cart-qty"
-                      className="form-control"
-                      defaultValue={1}
-                      min={1}
-                      max={10}
-                      step={1}
-                      data-decimals={0}
-                      required
-                    />
-                  </div>
-                  <div className="product-details-action">
+
+                  <div className="product-details-action ml-5">
                     <a
-                      href="#"
+                      onClick={() => handleClick(product.id, product.title)}
                       className="btn-product btn-cart"
                       style={{ textDecoration: "none" }}
                     >
