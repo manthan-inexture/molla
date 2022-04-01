@@ -1,28 +1,31 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { getData } from "../../../Admin/Component/redux/Product/productAction";
+import { useNavigate, useParams } from "react-router-dom";
 import { addToCart, getProductData } from "../../../redux/cart/cartAction";
-import { adjustQty } from "../../../redux/cart/cartAction";
 
 const ProductDetail = () => {
   const { productId } = useParams();
-  // const data = useSelector((state) => state.product.data);
-  // console.log("data", data);
+  const navigate = useNavigate();
+  const data = useSelector((state) => state.product.data);
   const dispatch = useDispatch();
   const productData = useSelector((state) => state.product.data);
-  const { products, cart } = useSelector((state) => state.cardItems);
+  const { products } = useSelector((state) => state.cardItems);
 
-  console.log("products", products);
+  // console.log("products", products);
   useEffect(() => {
-    dispatch(getProductData(productData))
+    dispatch(getProductData(productData));
   }, []);
 
   const handleClick = (id, title) => {
-    alert(`${title} added to cart`)
-    dispatch(addToCart(id))
-  }
+    alert(`${title} added to cart`);
+    dispatch(addToCart(id));
+  };
 
+  useEffect(() => {
+    if (products.length < 1) {
+      navigate("/shop");
+    }
+  });
   return (
     <>
       {products.map((product, i) =>
@@ -52,8 +55,6 @@ const ProductDetail = () => {
               <div className="product-content">
                 <p>{product.description}</p>
               </div>
-
-
 
               <div className="product-details-action">
                 <a

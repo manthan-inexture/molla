@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector, useDispatch } from "react-redux";
 import { removeToCart } from "../../../../redux/cart/cartAction";
 
 function HeaderMiddle() {
@@ -11,18 +11,18 @@ function HeaderMiddle() {
   const removeItem = (id) => {
     console.log(id);
     dispatch(removeToCart(id));
-  }
+  };
   useEffect(() => {
     console.log(cart);
     let cartCount = 0;
     let price = 0;
     cart.map((e) => {
       cartCount += e.qty;
-      price += e.qty * e.price
-    })
-    setPrice(price)
-    setCount(cartCount)
-  }, [cart])
+      price += e.qty * e.price;
+    });
+    setPrice(price);
+    setCount(cartCount);
+  }, [cart]);
   console.log(cart);
   return (
     <div>
@@ -91,39 +91,41 @@ function HeaderMiddle() {
               </a>
               <div className="dropdown-menu dropdown-menu-right">
                 <div className="dropdown-cart-products">
-
                   {cart.map((data) => {
                     return (
                       <>
                         <div className="product">
                           <div className="product-cart-details">
                             <h4 className="product-title">
-                              <a href="product.html">
-                                {data.title}
-                              </a>
+                              <a href="product.html">{data.title}</a>
                             </h4>
                             <span className="cart-product-info">
-                              <span className="cart-product-qty">{data.qty}</span>x ${data.price}
+                              <span className="cart-product-qty">
+                                {data.qty}
+                              </span>
+                              x ${data.price}
                             </span>
                           </div>
                           {/* End .product-cart-details */}
                           <figure className="product-image-container">
                             <a href="product.html" className="product-image">
-                              <img
-                                src={data.image}
-                                alt="product"
-                              />
+                              <img src={data.image} alt="product" />
                             </a>
                           </figure>
-                          <a href="#" className="btn-remove" title="Remove Product">
-                            <i className="icon-close" onClick={() => removeItem(data.id)} />
+                          <a
+                            href="#"
+                            className="btn-remove"
+                            title="Remove Product"
+                          >
+                            <i
+                              className="icon-close"
+                              onClick={() => removeItem(data.id)}
+                            />
                           </a>
                         </div>
                       </>
-                    )
-                  })
-
-                  }
+                    );
+                  })}
 
                   {/* End .product */}
                 </div>
@@ -134,7 +136,7 @@ function HeaderMiddle() {
                 </div>
                 {/* End .dropdown-cart-total */}
                 <div className="dropdown-cart-action">
-                  <Link to="viewcart" className="btn btn-primary">
+                  <Link to="viewcart" className="btn btn-outline-primary-2 ">
                     View Cart
                   </Link>
                   <Link to="checkout" className="btn btn-outline-primary-2">
@@ -143,7 +145,7 @@ function HeaderMiddle() {
                   </Link>
                 </div>
                 {/* End .dropdown-cart-total */}
-              </div>  
+              </div>
               {/* End .dropdown-menu */}
             </div>
             {/* End .cart-dropdown */}

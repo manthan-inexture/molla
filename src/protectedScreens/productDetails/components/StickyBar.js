@@ -12,9 +12,9 @@ const StickyBar = () => {
     dispatch(getData());
   }, []);
   const handleClick = (id, title) => {
-    alert(`${title} added to cart`)
-    dispatch(addToCart(id))
-  }
+    alert(`${title} added to cart`);
+    dispatch(addToCart(id));
+  };
   return (
     <>
       {data.map((product, i) =>
@@ -39,7 +39,7 @@ const StickyBar = () => {
                     <a
                       onClick={() => handleClick(product.id, product.title)}
                       className="btn-product btn-cart"
-                      style={{ textDecoration: "none" }}
+                      style={{ textDecoration: "none", cursor: "pointer" }}
                     >
                       <span>add to cart</span>
                     </a>
