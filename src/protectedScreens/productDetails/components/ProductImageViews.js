@@ -22,7 +22,7 @@ const ProductImageViews = () => {
                   <img src={product.image} alt="product image" />
                 </figure>
                 <div className="product-image-gallery">
-                  <a className="product-gallery-item active" href="#">
+                  <a className="product-gallery-item " href="#">
                     <img src={product.image} alt="product side" />
                   </a>
                   <a className="product-gallery-item" href="#">

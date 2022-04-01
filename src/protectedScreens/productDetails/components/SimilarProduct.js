@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getData } from "../../../Admin/Component/redux/Product/productAction";
 import { Link } from "react-router-dom";
+import { addToCart } from "../../../redux/cart/cartAction";
 
 const SimilarProduct = () => {
   const { productId } = useParams();
@@ -12,6 +13,11 @@ const SimilarProduct = () => {
   useEffect(() => {
     dispatch(getData());
   }, []);
+
+  const handleClick = (id, title) => {
+    alert(`${title} added to cart`);
+    dispatch(addToCart(id));
+  };
 
   // similar product functionality
   const productFilter = data?.filter((items, index) => items.id == productId);
@@ -42,9 +48,9 @@ const SimilarProduct = () => {
 
                 <div className="product-action">
                   <a
-                    href="#"
+                    onClick={() => handleClick(product.id, product.title)}
                     className="btn-product btn-cart"
-                    style={{ textDecoration: "none" }}
+                    style={{ textDecoration: "none", cursor: "pointer" }}
                   >
                     <span>ADD TO CART</span>
                   </a>

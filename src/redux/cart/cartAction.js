@@ -1,4 +1,4 @@
-import { ADD_TO_CART, REMOVE_TO_CART, ADJUST_QTY, GET_PRODUCT_DATA } from "./cartTypes";
+import { ADD_TO_CART, REMOVE_TO_CART, ADJUST_QTY, GET_PRODUCT_DATA, FORM_DATA } from "./cartTypes";
 
 export const getProductData = (data) => {
     return{
@@ -29,5 +29,12 @@ export const adjustQty = (itemID,value) => {
             id:itemID,
             qty:value,
         }
+    }
+}
+
+export const getFormData = (data) => {
+    return{
+        type: FORM_DATA,
+        data
     }
 }
