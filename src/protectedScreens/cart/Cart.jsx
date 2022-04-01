@@ -5,6 +5,7 @@ import { adjustQty, removeToCart } from "../../redux/cart/cartAction";
 
 const Cart = () => {
   const { cart } = useSelector((state) => state.cardItems);
+  console.log(cart);
   const dispatch = useDispatch();
 
   const qtyAdjust = (id, val) => {
@@ -117,6 +118,7 @@ const Cart = () => {
                                       step={1}
                                       value={data.qty}
                                       data-decimals={0}
+                                      onKeyDown={(e) => e.preventDefault()}
                                       required
                                       onChange={(e) => qtyAdjust(data.id, e.target.value)}
                                     />

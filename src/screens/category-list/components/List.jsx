@@ -59,8 +59,8 @@ const List = ({ data }) => {
               {/* End .rating-container */}
 
               {/* End .product-action */}
-              <a href="#" className="btn-product btn-cart">
-                <span onClick={() => handleClick(id, title)}>add to cart</span>
+              <a onClick={() => handleClick(id, title)} className="btn-product btn-cart">
+                <span>add to cart</span>
               </a>
             </div>
             {/* End .product-list-action */}

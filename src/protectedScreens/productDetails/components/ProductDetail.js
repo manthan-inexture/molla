@@ -2,18 +2,30 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getData } from "../../../Admin/Component/redux/Product/productAction";
+import { addToCart, getProductData } from "../../../redux/cart/cartAction";
+import { adjustQty } from "../../../redux/cart/cartAction";
 
 const ProductDetail = () => {
   const { productId } = useParams();
-  const data = useSelector((state) => state.product.data);
-  console.log("data", data);
+  // const data = useSelector((state) => state.product.data);
+  // console.log("data", data);
   const dispatch = useDispatch();
+  const productData = useSelector((state) => state.product.data);
+  const { products, cart } = useSelector((state) => state.cardItems);
+
+  console.log("products", products);
   useEffect(() => {
-    dispatch(getData());
+    dispatch(getProductData(productData))
   }, []);
+
+  const handleClick = (id, title) => {
+    alert(`${title} added to cart`)
+    dispatch(addToCart(id))
+  }
+
   return (
     <>
-      {data.map((product, i) =>
+      {products.map((product, i) =>
         product.id == productId ? (
           <div className="col-md-6" key={i}>
             <div className="product-details">
@@ -40,25 +52,12 @@ const ProductDetail = () => {
               <div className="product-content">
                 <p>{product.description}</p>
               </div>
-              <div className="details-filter-row details-row-size">
-                <label htmlFor="qty">Qty:</label>
-                <div className="product-details-quantity">
-                  <input
-                    type="number"
-                    id="qty"
-                    className="form-control"
-                    defaultValue={1}
-                    min={1}
-                    max={10}
-                    step={1}
-                    data-decimals={0}
-                    required
-                  />
-                </div>
-              </div>
+
+
+
               <div className="product-details-action">
                 <a
-                  href="#"
+                  onClick={() => handleClick(product.id, product.title)}
                   className="btn-product btn-cart"
                   style={{ textDecoration: "none" }}
                 >
