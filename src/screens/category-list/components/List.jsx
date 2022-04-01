@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { addToCart, getProductData } from "../../../redux/cart/cartAction";
 import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const List = ({ data }) => {
-
 
   const { id, title, category, image, rating, description, price } = data;
 
@@ -18,12 +19,16 @@ const List = ({ data }) => {
   }, [])
 
   const handleClick = (id, title) => {
-    alert(`${title} added to cart`)
+    toast.info(`${title} added to cart`,{
+      position: "bottom-right",
+      autoClose: 2000,
+      closeButton: false
+    });
     dispatch(addToCart(id))
   }
 
   return (
-    <div>
+    <>
       <div className="product product-list">
         <div className="row">
           <div className="col-6 col-lg-3">
@@ -73,10 +78,10 @@ const List = ({ data }) => {
               </div>
               {/* End .product-cat */}
               <h3 className="product-title">
-                < Link to = {
+                < Link to={
                   `/product/${id}`
                 } > {
-                  title
+                    title
                   } </ Link>
               </h3>
               {/* End .product-title */}
@@ -91,7 +96,10 @@ const List = ({ data }) => {
         </div>
         {/* End .row */}
       </div>
-    </div>
+
+      <ToastContainer/>
+    </>
+
   );
 };
 
