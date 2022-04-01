@@ -1,18 +1,18 @@
 import React,{ useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Search(props) {
     const [keyword, setKeyword] = useState('');
-    const [searchParams, setSearchParams] = useSearchParams();
+    // const [searchParams, setSearchParams] = useSearchParams();
     const navigate = useNavigate();
     const onSubmitHandler = e => {
         e.preventDefault();
         // alert(keyword)
         // setSearchParams({q: `${keyword}`})
-        navigate(`/shop/q=${keyword}`)
+        navigate(`/shop/${keyword}`)
     }
-    const test = searchParams.get('q');
-    console.log(`usesearchparams${test}`)
+    // const test = searchParams.get('q');
+    // console.log(`usesearchparams${test}`)
 
     return (
         <div>

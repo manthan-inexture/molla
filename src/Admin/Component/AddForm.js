@@ -17,20 +17,19 @@ const initialValues = {
 
 //validation with yup object
 const validationSchema = Yup.object({
-  title: Yup.string().required("Required"),
-  description: Yup.string().required("Required"),
-  category: Yup.string().required("Required"),
-  image: Yup.string().required("Required"),
-
+  title: Yup.string().required("Please Enter Title"),
+  description: Yup.string().required("Please Enter Description"),
+  category: Yup.string().required("Please Enter Category"),
   price: Yup.string()
     .required("Please Enter Price")
-    .matches(/^[0-9]+$/, "please enter Number only"),
+    .matches(/^[0-9]+.[0-9]+$/, "Please enter Numbers only"),
   rate: Yup.string()
     .required("Please Enter Rate")
-    .matches(/^[0-9]+$/, "please enter Number only"),
+    .matches(/^[0-4]{1}.[0-9]{1}$/, "Please enter Numbers only"),
   count: Yup.string()
     .required("Please Enter Count")
-    .matches(/^[0-9]+$/, "please enter Number only"),
+    .matches(/^[0-9]+$/, "Please enter Numbers only"),
+  image: Yup.string().required("Please select image with jpg/jpeg/png format"),
 });
 
 const AddForm = () => {
@@ -38,15 +37,29 @@ const AddForm = () => {
   const [displayimage, setDisplayImage] = useState();
   const dispatch = useDispatch();
 
+  const onSubmit = (values, { resetForm }) => {
+    dispatch(addData(values, data[data.length - 1].id));
+    resetForm();
+    setDisplayImage();
+  };
   const formik = useFormik({
     initialValues,
-    onSubmit(values, displayimage) {
-      console.log("add data", displayimage);
-      dispatch(addData(values, data[data.length - 1].id));
-    },
+    onSubmit,
     validationSchema,
   });
 
+  const handlefilechange = (e) => {
+    let allowedExtension = ["image/jpeg", "image/jpg", "image/png"];
+    if (allowedExtension.indexOf(e.target.files[0].type) > -1) {
+      formik.errors.image = "";
+    } else {
+      formik.errors.image = "Please select image with jpg/jpeg or png format";
+    }
+    console.log(e.target.files[0].type);
+    formik.values.image = URL.createObjectURL(e.target.files[0]);
+    setDisplayImage(formik.values.image);
+    e.target.value = "";
+  };
   return (
     <>
       {/* <!-- Modal --> */}
@@ -62,7 +75,7 @@ const AddForm = () => {
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title" id="exampleModalLabel">
-                  Add Data
+                  Add New Product
                 </h5>
                 <button
                   type="button"
@@ -83,12 +96,13 @@ const AddForm = () => {
                         className="form-control"
                         id="title"
                         name="title"
+                        placeholder="Title"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.title}
                       />
                       {formik.errors.title && formik.touched.title ? (
-                        <p>{formik.errors.title}</p>
+                        <p style={{ color: "red" }}>{formik.errors.title}</p>
                       ) : null}
                     </div>
                     <div className="mb-3">
@@ -98,7 +112,7 @@ const AddForm = () => {
 
                       <textarea
                         className="form-control"
-                        placeholder="Leave a comment here"
+                        placeholder="Description"
                         id="Description"
                         name="description"
                         onChange={formik.handleChange}
@@ -107,7 +121,9 @@ const AddForm = () => {
                       ></textarea>
                       {formik.errors.description &&
                       formik.touched.description ? (
-                        <p>{formik.errors.description}</p>
+                        <p style={{ color: "red" }}>
+                          {formik.errors.description}
+                        </p>
                       ) : null}
                     </div>
                     <div className="mb-3">
@@ -122,7 +138,7 @@ const AddForm = () => {
                         onBlur={formik.handleBlur}
                         value={formik.values.category}
                       >
-                        <option>Open this select menu</option>
+                        <option value="">Select one Category</option>
                         <option value="men's clothing">Men's Clothing</option>
                         <option value="jewelery">Jewelery</option>
                         <option value="electronics">Electronics</option>
@@ -131,7 +147,7 @@ const AddForm = () => {
                         </option>
                       </select>
                       {formik.errors.category && formik.touched.category ? (
-                        <p>{formik.errors.category}</p>
+                        <p style={{ color: "red" }}>{formik.errors.category}</p>
                       ) : null}
                     </div>
                     <div className="row">
@@ -144,12 +160,13 @@ const AddForm = () => {
                             type="text"
                             className="form-control"
                             id="rate"
+                            placeholder="Rate"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             value={formik.values.rate}
                           />
                           {formik.errors.rate && formik.touched.rate ? (
-                            <p>{formik.errors.rate}</p>
+                            <p style={{ color: "red" }}>{formik.errors.rate}</p>
                           ) : null}
                         </div>
                       </div>
@@ -162,12 +179,15 @@ const AddForm = () => {
                             type="text"
                             className="form-control"
                             id="count"
+                            placeholder="Count"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             value={formik.values.count}
                           />
                           {formik.errors.count && formik.touched.count ? (
-                            <p>{formik.errors.count}</p>
+                            <p style={{ color: "red" }}>
+                              {formik.errors.count}
+                            </p>
                           ) : null}
                         </div>
                       </div>
@@ -184,12 +204,15 @@ const AddForm = () => {
                             type="text"
                             className="form-control"
                             id="price"
+                            placeholder="Price"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             value={formik.values.price}
                           />
                           {formik.errors.price && formik.touched.price ? (
-                            <p>{formik.errors.price}</p>
+                            <p style={{ color: "red" }}>
+                              {formik.errors.price}
+                            </p>
                           ) : null}
                         </div>
                       </div>
@@ -202,11 +225,14 @@ const AddForm = () => {
                             type="file"
                             className="form-control"
                             id="image"
-                            onChange={formik.handleChange}
+                            name="image"
+                            onChange={(e) => handlefilechange(e)}
                             onBlur={formik.handleBlur}
                           />
                           {formik.errors.image && formik.touched.image ? (
-                            <p>{formik.errors.image}</p>
+                            <p style={{ color: "red" }}>
+                              {formik.errors.image}
+                            </p>
                           ) : null}
                         </div>
                       </div>

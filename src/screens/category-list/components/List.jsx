@@ -35,10 +35,10 @@ const List = ({ data }) => {
                 </div>
                 {/* End .ratings */}
                 <span className="ratings-text">( {rating.count} Reviews )</span>
-                  <div
+                  {/* <div
                     className="ratings-val"
                     style={{ width: `${rating.rate * 20}%` }}
-                  />
+                  /> */}
                   {/* End .ratings-val */}
                 </div>
                 {/* End .ratings */}

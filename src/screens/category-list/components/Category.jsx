@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 
 const Category = ({changeFilter}) => {
    const [test,setTest]=useState([])
-   console.log(test)
-
+  //  console.log(test)
    useEffect(()=>{
     changeFilter(test)
    },[test])
