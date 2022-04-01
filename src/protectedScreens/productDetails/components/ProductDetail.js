@@ -1,17 +1,18 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getData } from "../../../Admin/Component/redux/Product/productAction";
 import { addToCart, getProductData } from "../../../redux/cart/cartAction";
 import { adjustQty } from "../../../redux/cart/cartAction";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProductDetail = () => {
   const { productId } = useParams();
-  // const data = useSelector((state) => state.product.data);
-  // console.log("data", data);
   const dispatch = useDispatch();
   const productData = useSelector((state) => state.product.data);
   const { products, cart } = useSelector((state) => state.cardItems);
+  const navigate = useNavigate();
 
   console.log("products", products);
   useEffect(() => {
@@ -19,9 +20,19 @@ const ProductDetail = () => {
   }, []);
 
   const handleClick = (id, title) => {
-    alert(`${title} added to cart`)
+    toast.info(`${title} added to cart`,{
+      position: "bottom-right",
+      autoClose: 2000,
+      closeButton: false
+    });
     dispatch(addToCart(id))
   }
+
+  useEffect(() => {
+    if(products.length < 1){
+      navigate("/shop")
+    }
+  })
 
   return (
     <>
@@ -53,8 +64,6 @@ const ProductDetail = () => {
                 <p>{product.description}</p>
               </div>
 
-
-
               <div className="product-details-action">
                 <a
                   onClick={() => handleClick(product.id, product.title)}
@@ -64,6 +73,7 @@ const ProductDetail = () => {
                   <span>ADD TO CART</span>
                 </a>
               </div>
+              
               <div className="product-details-footer">
                 <div className="product-cat">
                   <span>Category:</span>
@@ -112,6 +122,7 @@ const ProductDetail = () => {
           </div>
         ) : null
       )}
+      <ToastContainer/>
     </>
   );
 };

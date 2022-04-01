@@ -1,8 +1,9 @@
-import { ADD_TO_CART, REMOVE_TO_CART, ADJUST_QTY, GET_PRODUCT_DATA } from "./cartTypes";
+import { ADD_TO_CART, REMOVE_TO_CART, ADJUST_QTY, GET_PRODUCT_DATA, FORM_DATA } from "./cartTypes";
 
 const initialState ={
     products: [],
-    cart: []
+    cart: [],
+    form: []
 }
 
 export const cardItems = (state = initialState, action) => {
@@ -39,7 +40,14 @@ export const cardItems = (state = initialState, action) => {
             return{
                 ...state,
                 cart: state.cart.map((item) => item.id === action.payload.id ? { ...item, qty: +action.payload.qty } : item )
-            }      
+            }   
+            
+        case FORM_DATA:
+            return{
+                ...state,
+                form: action.data
+            }
+  
         
         default:
             return state
