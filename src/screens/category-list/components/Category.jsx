@@ -31,6 +31,7 @@ const Category = ({changeFilter}) => {
                     className="custom-control-input"
                     id="cat-1"
                     value="all"
+                  
                     onClick={(e)=>{
                       let checked =e.target.checked;
                       if(checked)

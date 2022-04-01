@@ -229,39 +229,15 @@
       }
     },
     {
-      "title": "man tshirt",
-      "price": "255.68",
-      "description": "akmlkjajan",
-      "category": "men's clothing",
-      "image": "blob:http://localhost:3000/70afadb9-33ea-4493-8529-aa995b132964",
-      "rating": {
-        "rate": "4.5",
-        "count": "120"
-      },
-      "id": 21
-    },
-    {
-      "id": 22,
-      "title": "man sjcn",
-      "price": "255.68",
-      "description": "ouhiuh; ouh",
-      "category": "men's clothing",
-      "image": "blob:http://localhost:3000/08e1b54f-2266-40c5-9c6e-962bcb8ae919",
-      "rating": {
-        "rate": "3.2",
-        "count": "87"
-      }
-    },
-    {
-      "id": 23,
-      "title": "women t-shirt",
-      "price": "255.68",
-      "description": "kjnv",
+      "id": 20,
+      "title": "DANVOUY Womens T Shirt Casual Cotton Short",
+      "price": 12.99,
+      "description": "95%Cotton,5%Spandex, Features: Casual, Short Sleeve, Letter Print,V-Neck,Fashion Tees, The fabric is soft and has some stretch., Occasion: Casual/Office/Beach/School/Home/Street. Season: Spring,Summer,Autumn,Winter.",
       "category": "women's clothing",
-      "image": "blob:http://localhost:3000/ac98e051-5fd0-4f76-8ead-9e3f4340216c",
+      "image": "https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg",
       "rating": {
-        "rate": "4.5",
-        "count": "58"
+        "rate": 3.6,
+        "count": 145
       }
     }
   ]

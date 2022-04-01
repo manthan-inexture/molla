@@ -5,18 +5,22 @@ import PageNav from "./PageNav";
 import { useSelector } from "react-redux";
 import Toolbox from "./Toolbox";
 const PageContent = ({ category }) => {
-  const [filter, setFilter] = useState([]);
-  const [filterdata, setFilterdata] = useState([]);
-  const [sortfilterdata, setsortFilterdata] = useState([]);
-  // console.log("category", category);
+  const All_Products = useSelector((state) => state?.product?.data); // all product
+  const [filter, setFilter] = useState([]); //fiter array for check box(value)
+  const [filterdata, setFilterdata] = useState([]); //check box no filter data
+  const [displayfinaldata, setDisplayfinaldata] = useState([]); //final data
 
-  const changeFilter = (arr) => {
-    setFilter(arr);
-  };
-  const sortingFilterData =(arr)=>{
-    setsortFilterdata(arr);
-  }
-
+  //pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const productPerPage = 3;
+  const indexOfLastProduct = currentPage * productPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productPerPage;
+  const currentProducts = displayfinaldata.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+  const paginate = (number) => setCurrentPage(number);
+//filter for category 
   useEffect(() => {
     if (category === "all" || category === undefined) {
       setFilter(["all"]);
@@ -37,10 +41,7 @@ const PageContent = ({ category }) => {
       setFilter([category]);
     }
   }, [category]);
-
-  const All_Products = useSelector((state) => state?.product?.data);
-  // console.log("All_Products", All_Products);
-
+//filter for checkbox
   useEffect(() => {
     // console.log("hey", All_Products);
     if (All_Products.length !== 0) {
@@ -51,42 +52,38 @@ const PageContent = ({ category }) => {
         } else return filter.includes(item.category);
       });
       setFilterdata(data);
+      setDisplayfinaldata(data);
     }
-  }, [All_Products, filter]);
+  }, [filter]);
 
-  //sorting
+  const changeFilter = (arr) => {
+    setFilter(arr);
+  };
 
-  useEffect(()=>{
-    console.log("MADAARCHOD",sortfilterdata)
-    if (sortfilterdata == "popularity") {
-      const data = filterdata.sort(function (a, b) {
+  //sorting function
+  const sortingFilterData = (value) => {
+    var data = [];
+    console.log(value);
+    if (value === "popularity") {
+      data = filterdata.sort(function (a, b) {
         return b.rating.count - a.rating.count;
       });
-      if (sortfilterdata == "mostRated") {
-        const data = filterdata.sort(function (a, b) {
-          return b.rating.rate - a.rating.rate;
-        });
-      }
-      // console.log("count",data);
-      // data.forEach((customer) => {
-      //   console.log(customer);
-      // });
-       setFilterdata(data);
+    } else if (value === "mostRated") {
+      data = filterdata.sort(function (a, b) {
+        return b.rating.rate - a.rating.rate;
+      });
+    } else if (value === "lowtoHigh") {
+      data = filterdata.sort(function (a, b) {
+        return a.price - b.price;
+      });
+    } else if (value === "hightoLaw") {
+      data = filterdata.sort(function (a, b) {
+        return b.price - a.price;
+      });
     }
-   
-  },[All_Products, sortfilterdata])
-  
-  //  console.log("filterdata", filterdata)
-  //pagination
-  const [currentPage, setCurrentPage] = useState(1);
-  const productPerPage = 3;
-  const indexOfLastProduct = currentPage * productPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productPerPage;
-  const currentProducts = filterdata.slice(
-    indexOfFirstProduct,
-    indexOfLastProduct
-  );
-  const paginate = (number) => setCurrentPage(number);
+    console.log("sorting",data);
+    setDisplayfinaldata(data);
+  };
 
   return (
     <>
@@ -94,10 +91,35 @@ const PageContent = ({ category }) => {
         <div className="container">
           <div className="row">
             <div className="col-lg-9">
-              <Toolbox sortingFilter={sortingFilterData} />
+              <div className="toolbox">
+                {/* start .toolbox-left */}
+                <div className="toolbox-right">
+                  <div className="toolbox-sort">
+                    <label htmlFor="sortby">Sort by:</label>
+                    <div className="select-custom">
+                      <select
+                        name="sortby"
+                        id="sortby"
+                        className="form-control"
+                        onChange={(e) => sortingFilterData(e.target.value)}
+                      >
+                        <option value="" selected="selected">
+                          Sort by
+                        </option>
+                        <option value="popularity">Most Popular</option>
+                        <option value="mostRated">Most Rated</option>
+                        <option value="lowtoHigh">Price -- Low to High</option>
+                        <option value="hightoLaw">Price -- High to Low</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                {/* End .toolbox-right */}
+              </div>
               {/* proucts-start */}
               <div className="products mb-3">
-                {currentProducts?.map((data, index) => {
+                {currentProducts.map((data) => {
+                  // console.log(displayfinaldata);
                   return <List data={data} />;
                 })}
               </div>
