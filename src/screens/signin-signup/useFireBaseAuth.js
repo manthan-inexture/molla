@@ -31,6 +31,7 @@ const useFireBaseAuth = () => {
 
         dispatch(adduser(user))
         dispatch(isSignin())
+        localStorage.setItem("islogin", true);
         navigate('/shop');
       })
       .catch((error) => {
@@ -53,6 +54,7 @@ const useFireBaseAuth = () => {
       }
       dispatch(adduser(user))
       dispatch(isSignin())
+      localStorage.setItem("islogin", "true");
       navigate('/shop');
     }).catch((error) => {
       alert("you are blocked by admin");
@@ -66,7 +68,7 @@ const useFireBaseAuth = () => {
     e.preventDefault();
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // alert("signup successful");
+        alert("signup successful");
         const credential = userCredential.user;
         const user = {
           userid: credential.uid,
@@ -76,7 +78,8 @@ const useFireBaseAuth = () => {
           emailVerified: credential.emailVerified
         }
         dispatch(adduser(user))
-        dispatch(islogin(true))
+        dispatch(isSignin())
+        localStorage.setItem("islogin", "true");
         navigate('/shop');
       })
       .catch((error) => {

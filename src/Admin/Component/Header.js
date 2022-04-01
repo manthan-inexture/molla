@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Header = () => {
+  useEffect(() => {
+    var element = document.createElement("link");
+    element.type = "text/css";
+    element.rel = "stylesheet";
+    element.id = "adminCSS";
+    element.href = "/dist/css/adminlte.min.css";
+    console.log("asdas", element);
+
+    document.getElementsByTagName("head")[0].appendChild(element);
+
+    // return () => document.getElementById("adminCSS")?.remove();
+  }, []);
   return (
     <div>
       <nav className="main-header navbar navbar-expand navbar-white navbar-light">
@@ -19,7 +31,11 @@ const Header = () => {
           </li>
         </ul>
         {/* Right navbar links */}
-        <ul className="navbar-nav ml-auto">{/* Navbar Search */}</ul>
+        <ul className="navbar-nav ml-auto">
+          <button type="button" class="btn btn-outline-primary mr-2 mt-1 mb-1">
+            Log Out
+          </button>
+        </ul>
       </nav>
       {/* /.navbar */}
       {/* Main Sidebar Container */}
@@ -49,7 +65,7 @@ const Header = () => {
               {/* Add icons to the links using the .nav-icon class
                  with font-awesome or any other icon font library */}
               <li className="nav-item">
-                <Link to="/users" className="nav-link">
+                <Link to="/admin/users" className="nav-link">
                   <i className="nav-icon fas fa-th" />
                   <p>Users</p>
                 </Link>
@@ -57,13 +73,13 @@ const Header = () => {
                 {/* </a> */}
               </li>
               <li className="nav-item">
-                <Link to="/products" className="nav-link">
+                <Link to="/admin/products" className="nav-link">
                   <i className="nav-icon fas fa-th" />
                   <p>Products</p>
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/orders" className="nav-link">
+                <Link to="/admin/orders" className="nav-link">
                   <i className="nav-icon fas fa-th" />
                   <p>Orders</p>
                 </Link>

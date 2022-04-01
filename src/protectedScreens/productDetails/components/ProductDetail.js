@@ -1,105 +1,117 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { getData } from "../../../Admin/Component/redux/Product/productAction";
+import { addToCart, getProductData } from "../../../redux/cart/cartAction";
+import { adjustQty } from "../../../redux/cart/cartAction";
 
 const ProductDetail = () => {
+  const { productId } = useParams();
+  // const data = useSelector((state) => state.product.data);
+  // console.log("data", data);
+  const dispatch = useDispatch();
+  const productData = useSelector((state) => state.product.data);
+  const { products, cart } = useSelector((state) => state.cardItems);
+
+  console.log("products", products);
+  useEffect(() => {
+    dispatch(getProductData(productData))
+  }, []);
+
+  const handleClick = (id, title) => {
+    alert(`${title} added to cart`)
+    dispatch(addToCart(id))
+  }
+
   return (
     <>
-      <div className="col-md-6">
-        <div className="product-details">
-          <h1 className="product-title">
-            Dark yellow lace cut out swing dress
-          </h1>
-          <div className="ratings-container">
-            <div className="ratings">
-              <div className="ratings-val" style={{ width: "80%" }} />
-            </div>
-            <a
-              className="ratings-text"
-              href="#product-review-link"
-              id="review-link"
-              style={{ textDecoration: "none" }}
-            >
-              ( 2 Reviews )
-            </a>
-          </div>
-          <div className="product-price">$84.00</div>
-          <div className="product-content">
-            <p>
-              Sed egestas, ante et vulputate volutpat, eros pede semper est,
-              vitae luctus metus libero eu augue. Morbi purus libero, faucibus
-              adipiscing. Sed lectus.
-            </p>
-          </div>
-          <div className="details-filter-row details-row-size">
-            <label htmlFor="qty">Qty:</label>
-            <div className="product-details-quantity">
-              <input
-                type="number"
-                id="qty"
-                className="form-control"
-                defaultValue={1}
-                min={1}
-                max={10}
-                step={1}
-                data-decimals={0}
-                required
-              />
-            </div>
-          </div>
-          <div className="product-details-action">
-            <a
-              href="#"
-              className="btn-product btn-cart"
-              style={{ textDecoration: "none" }}
-            >
-              <span>add to cart</span>
-            </a>
-          </div>
-          <div className="product-details-footer">
-            <div className="product-cat">
-              <span>Category:</span>
-              <a href="#" style={{ textDecoration: "none" }}>
-                Women
-              </a>
-            </div>
-            <div className="social-icons social-icons-sm">
-              <span className="social-label">Share:</span>
-              <a
-                href="https://www.facebook.com/"
-                className="social-icon"
-                title="Facebook"
-                target="_blank"
-              >
-                <i className="icon-facebook-f" />
-              </a>
+      {products.map((product, i) =>
+        product.id == productId ? (
+          <div className="col-md-6" key={i}>
+            <div className="product-details">
+              <h1 className="product-title">{product.title}</h1>
+              <div className="ratings-container">
+                <div className="ratings">
+                  <div
+                    className="ratings-val"
+                    style={{ width: `${product.rating.rate * 20}%` }}
+                  >
+                    {product.rating.rate}
+                  </div>
+                </div>
+                <a
+                  className="ratings-text"
+                  href="#product-review-link"
+                  id="review-link"
+                  style={{ textDecoration: "none" }}
+                >
+                  ({product.rating.count} Reviews)
+                </a>
+              </div>
+              <div className="product-price">${product.price}</div>
+              <div className="product-content">
+                <p>{product.description}</p>
+              </div>
 
-              <a
-                href="https://twitter.com/"
-                className="social-icon"
-                title="Twitter"
-                target="_blank"
-              >
-                <i className="icon-twitter" />
-              </a>
-              <a
-                href="https://www.instagram.com/"
-                className="social-icon"
-                title="Instagram"
-                target="_blank"
-              >
-                <i className="icon-instagram" />
-              </a>
-              <a
-                href="https://in.pinterest.com/"
-                className="social-icon"
-                title="Pinterest"
-                target="_blank"
-              >
-                <i className="icon-pinterest" />
-              </a>
+
+
+              <div className="product-details-action">
+                <a
+                  onClick={() => handleClick(product.id, product.title)}
+                  className="btn-product btn-cart"
+                  style={{ textDecoration: "none" }}
+                >
+                  <span>ADD TO CART</span>
+                </a>
+              </div>
+              <div className="product-details-footer">
+                <div className="product-cat">
+                  <span>Category:</span>
+                  <a href="#" style={{ textDecoration: "none" }}>
+                    {product.category}
+                  </a>
+                </div>
+                <div className="social-icons social-icons-sm">
+                  <span className="social-label">Share:</span>
+                  <a
+                    href="https://www.facebook.com/"
+                    className="social-icon"
+                    title="Facebook"
+                    target="_blank"
+                  >
+                    <i className="icon-facebook-f" />
+                  </a>
+
+                  <a
+                    href="https://twitter.com/"
+                    className="social-icon"
+                    title="Twitter"
+                    target="_blank"
+                  >
+                    <i className="icon-twitter" />
+                  </a>
+                  <a
+                    href="https://www.instagram.com/"
+                    className="social-icon"
+                    title="Instagram"
+                    target="_blank"
+                  >
+                    <i className="icon-instagram" />
+                  </a>
+                  <a
+                    href="https://in.pinterest.com/"
+                    className="social-icon"
+                    title="Pinterest"
+                    target="_blank"
+                  >
+                    <i className="icon-pinterest" />
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        ) : null
+      )}
     </>
   );
 };

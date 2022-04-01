@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 const CategoryListNav = (props) => {
   return (
@@ -7,13 +8,10 @@ const CategoryListNav = (props) => {
         <div className="container">
           <ol className="breadcrumb">
             <li className="breadcrumb-item">
-              <a href="index.html">Home</a>
+              <NavLink  className="breadcrumb-item" to="/">Home</NavLink>
             </li>
             <li className="breadcrumb-item">
-              <a href="#">Shop</a>
-            </li>
-            <li className="breadcrumb-item active" aria-current="page">
-              List
+            <NavLink  className="breadcrumb-item" to="/shop">shop</NavLink>
             </li>
           </ol>
         </div>

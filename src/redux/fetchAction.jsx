@@ -15,7 +15,7 @@ export const fetchFailure = error => {
 export const fetchProducts = props => {
     return (dispatch) => {
         dispatch(fetchRequest)
-        axios.get('https://fakestoreapi.com/products')
+        axios.get('http://localhost:3001/products')
         .then(res => {
             // console.log(res)
             dispatch(fetchSuccess(res.data))

@@ -7,10 +7,9 @@ const Billdetails = () => {
   const { register, handleSubmit } = useForm();
 
   // store encrypted data in localstorage
-
   const onSubmit = (data) => {
     console.log(data);
-    localStorage.setItem("cheoout-form-data", window.btoa(JSON.stringify(data)));
+    localStorage.setItem("chekout-form-data", window.btoa(JSON.stringify(data)));
   };
 
   return (

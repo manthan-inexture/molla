@@ -1,6 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const Payement = () => {
+  const { cart } = useSelector((state) => state.cardItems);
+  const [price, setPrice] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  useEffect(() => {
+    console.log(cart);
+    let price = 0;
+    cart.map((e) => {
+      price += e.qty * e.price;
+    })
+    setPrice(price)
+  }, [cart])
+
+  const freeDel = () => {
+    setTotalPrice(0)
+  }
+
+  const standardDel = () => {
+    setTotalPrice(10)
+  }
+
+  const expressDel = () => {
+    setTotalPrice(20)
+  }
   return (
     <>
       <aside className="col-lg-3">
@@ -15,30 +40,85 @@ const Payement = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>
-                  <a href="#">Beige knitted elastic runner shoes</a>
-                </td>
-                <td>$84.00</td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="#">Blue utility pinafore denimdress</a>
-                </td>
-                <td>$76,00</td>
-              </tr>
+              {
+                cart.map((data) => {
+                  return (
+                    <>
+                      <tr>
+                        <td>
+                          <a>{data.title}</a>
+                        </td>
+                        <td>${`${data.price} x ${data.qty}`}</td>
+                      </tr>
+                    </>
+                  )
+                })
+              }
+
               <tr className="summary-subtotal">
                 <td>Subtotal:</td>
-                <td>$160.00</td>
+                <td>${price}</td>
               </tr>
               {/* End .summary-subtotal */}
-              <tr>
+              <tr className="summary-shipping">
                 <td>Shipping:</td>
-                <td>Free shipping</td>
+                <td>&nbsp;</td>
               </tr>
-              <tr className="summary-total">
+
+              <tr className="summary-shipping-row">
+                <td>
+                  <div className="custom-control custom-radio"> <input
+                    type="radio"
+                    id="free-shipping"
+                    name="shipping"
+                    className="custom-control-input"
+                    onClick={freeDel}
+                  /> <label
+                    className="custom-control-label"
+                    htmlFor="free-shipping"
+                  >
+                      Free Shipping
+                    </label></div>
+                </td>
+                <td>$0.00</td>
+              </tr>
+              <tr className="summary-shipping-row">
+                <td>
+                  <div className="custom-control custom-radio"> <input
+                    type="radio"
+                    id="standard-shipping"
+                    name="shipping"
+                    className="custom-control-input"
+                    onClick={standardDel}
+                  /> <label
+                    className="custom-control-label"
+                    htmlFor="standard-shipping"
+                  >
+                      Standard
+                    </label></div>
+                </td>
+                <td>$10.00</td>
+              </tr>
+              <tr className="summary-shipping-row">
+                <td>
+                  <div className="custom-control custom-radio"> <input
+                    type="radio"
+                    id="express-shipping"
+                    name="shipping"
+                    className="custom-control-input"
+                    onClick={expressDel}
+                  /> <label
+                    className="custom-control-label"
+                    htmlFor="express-shipping"
+                  >
+                      Express
+                    </label></div>
+                </td>
+                <td>$20.00</td>
+              </tr>
+              <tr>
                 <td>Total:</td>
-                <td>$160.00</td>
+                <td>${(price + totalPrice).toFixed(2)}</td>
               </tr>
               {/* End .summary-total */}
             </tbody>

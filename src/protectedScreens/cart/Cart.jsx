@@ -1,6 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { adjustQty, removeToCart } from "../../redux/cart/cartAction";
 
 const Cart = () => {
+  const { cart } = useSelector((state) => state.cardItems);
+  console.log(cart);
+  const dispatch = useDispatch();
+
+  const qtyAdjust = (id, val) => {
+    console.log(val);
+    console.log(id);
+    dispatch(adjustQty(id, val))
+  }
+
+  const removeItem = (id) => {
+    console.log(id);
+    dispatch(removeToCart(id));
+  }
+
+  const [price, setPrice] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  useEffect(() => {
+    console.log(cart);
+    let price = 0;
+    cart.map((e) => {
+      price += e.qty * e.price;
+    })
+    setPrice(price)
+  }, [cart])
   return (
     <>
       <div className="page-content">
@@ -52,51 +81,62 @@ const Cart = () => {
                         <th />
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr>
-                        <td className="product-col">
-                          <div className="product" style={{ height: "100px" }}>
-                            <figure className="product-media">
-                              <a href="#">
-                                <img
-                                  src="assets/images/products/table/product-1.jpg"
-                                  alt="Product image"
-                                />
-                              </a>
-                            </figure>
-                            <h3 className="product-title">
-                              <a href="#" style={{ textDecoration: "none" }}>
-                                Beige knitted elastic runner shoes
-                              </a>
-                            </h3>
-                            {/* End .product-title */}
-                          </div>
-                          {/* End .product */}
-                        </td>
-                        <td className="price-col">$84.00</td>
-                        <td className="quantity-col">
-                          <div className="cart-product-quantity">
-                            <input
-                              type="number"
-                              className="form-control"
-                              defaultValue={1}
-                              min={1}
-                              max={10}
-                              step={1}
-                              data-decimals={0}
-                              required
-                            />
-                          </div>
-                          {/* End .cart-product-quantity */}
-                        </td>
-                        <td className="total-col">$84.00</td>
-                        <td className="remove-col">
-                          <button className="btn-remove">
-                            <i className="icon-close" />
-                          </button>
-                        </td>
-                      </tr>
-                    </tbody>
+                    {
+                      cart.map((data) => {
+                        return (
+                          <>
+                            <tbody>
+                              <tr>
+                                <td className="product-col">
+                                  <div className="product" style={{ height: "100px" }}>
+                                    <figure className="product-media">
+                                      <a href="#">
+                                        <img
+                                          src={data.image}
+                                          alt="Product image"
+                                        />
+                                      </a>
+                                    </figure>
+                                    <h3 className="product-title">
+                                      <a href="#" style={{ textDecoration: "none" }}>
+                                        {data.title}
+                                      </a>
+                                    </h3>
+                                    {/* End .product-title */}
+                                  </div>
+                                  {/* End .product */}
+                                </td>
+                                <td className="price-col">${data.price}</td>
+                                <td className="quantity-col">
+                                  <div className="cart-product-quantity">
+                                    <input
+                                      type="number"
+                                      className="form-control"
+                                      defaultValue={1}
+                                      min={1}
+                                      max={10}
+                                      step={1}
+                                      value={data.qty}
+                                      data-decimals={0}
+                                      onKeyDown={(e) => e.preventDefault()}
+                                      required
+                                      onChange={(e) => qtyAdjust(data.id, e.target.value)}
+                                    />
+                                  </div>
+                                  {/* End .cart-product-quantity */}
+                                </td>
+                                <td className="total-col">${(data.price * data.qty).toFixed(2)}</td>
+                                <td className="remove-col">
+                                  <button className="btn-remove">
+                                    <i onClick={() => removeItem(data.id)} className="icon-close" />
+                                  </button>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </>
+                        )
+                      })
+                    }
                   </table>
                   {/* End .table table-wishlist */}
                   <div className="cart-bottom">
@@ -147,76 +187,10 @@ const Cart = () => {
                       <tbody>
                         <tr className="summary-subtotal">
                           <td>Subtotal:</td>
-                          <td>$160.00</td>
+                          <td>${price}</td>
                         </tr>
                         {/* End .summary-subtotal */}
-                        <tr className="summary-shipping">
-                          <td>Shipping:</td>
-                          <td>&nbsp;</td>
-                        </tr>
-                        <tr className="summary-shipping-row">
-                          <td>
-                            <div className="custom-control custom-radio">
-                              <input
-                                type="radio"
-                                id="free-shipping"
-                                name="shipping"
-                                className="custom-control-input"
-                              />
-                              <label
-                                className="custom-control-label"
-                                htmlFor="free-shipping"
-                              >
-                                Free Shipping
-                              </label>
-                            </div>
-                            {/* End .custom-control */}
-                          </td>
-                          <td>$0.00</td>
-                        </tr>
-                        {/* End .summary-shipping-row */}
-                        <tr className="summary-shipping-row">
-                          <td>
-                            <div className="custom-control custom-radio">
-                              <input
-                                type="radio"
-                                id="standart-shipping"
-                                name="shipping"
-                                className="custom-control-input"
-                              />
-                              <label
-                                className="custom-control-label"
-                                htmlFor="standart-shipping"
-                              >
-                                Standart:
-                              </label>
-                            </div>
-                            {/* End .custom-control */}
-                          </td>
-                          <td>$10.00</td>
-                        </tr>
-                        {/* End .summary-shipping-row */}
-                        <tr className="summary-shipping-row">
-                          <td>
-                            <div className="custom-control custom-radio">
-                              <input
-                                type="radio"
-                                id="express-shipping"
-                                name="shipping"
-                                className="custom-control-input"
-                              />
-                              <label
-                                className="custom-control-label"
-                                htmlFor="express-shipping"
-                              >
-                                Express:
-                              </label>
-                            </div>
-                            {/* End .custom-control */}
-                          </td>
-                          <td>$20.00</td>
-                        </tr>
-                        {/* End .summary-shipping-row */}
+
                         <tr className="summary-shipping-estimate">
                           <td>
                             Estimate for Your Country
@@ -233,19 +207,19 @@ const Cart = () => {
                         {/* End .summary-shipping-estimate */}
                         <tr className="summary-total">
                           <td>Total:</td>
-                          <td>$160.00</td>
+                          <td>${(price + totalPrice).toFixed(2)}</td>
                         </tr>
                         {/* End .summary-total */}
                       </tbody>
                     </table>
                     {/* End .table table-summary */}
-                    <a
-                      href="checkout.html"
+                    <NavLink
+                      to="/checkout"
                       className="btn btn-outline-primary-2 btn-order btn-block shadow-none"
                       style={{ border: "1px solid #c96", fontSize: "1.4rem" }}
                     >
                       PROCEED TO CHECKOUT
-                    </a>
+                    </NavLink>
                   </div>
                   {/* End .summary */}
                   <a

@@ -1,21 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { addToCart, getProductData } from "../../../redux/cart/cartAction";
+import { useDispatch, useSelector } from "react-redux";
 
-const List = ({data}) => { 
-  const {id,title,category,image,rating,description,price} =data
+const List = ({ data }) => {
+
+
+  const { id, title, category, image, rating, description, price } = data;
+
+  const dispatch = useDispatch();
+
+  const productData = useSelector((state) => state.product.data);
+  console.log(productData);
+
+  useEffect(() => {
+    dispatch(getProductData(productData))
+  }, [])
+
+  const handleClick = (id, title) => {
+    alert(`${title} added to cart`)
+    dispatch(addToCart(id))
+  }
+
   return (
     <div>
       <div className="product product-list">
         <div className="row">
-
           <div className="col-6 col-lg-3">
             <figure className="product-media">
-              <a href="product.html">
+              <Link to={`/product/${id}`}>
                 <img
                   src={image}
                   alt="Product image"
                   className="product-image"
                 />
-              </a>
+              </Link>
             </figure>
             {/* End .product-media */}
           </div>
@@ -28,7 +47,10 @@ const List = ({data}) => {
               {/* End .product-price */}
               <div className="ratings-container">
                 <div className="ratings">
-                  <div className="ratings-val" style={{ width: `${rating.rate * 20}%` }} />
+                  <div
+                    className="ratings-val"
+                    style={{ width: `${rating.rate * 20}%` }}
+                  />
                   {/* End .ratings-val */}
                 </div>
                 {/* End .ratings */}
@@ -37,7 +59,7 @@ const List = ({data}) => {
               {/* End .rating-container */}
 
               {/* End .product-action */}
-              <a href="#" className="btn-product btn-cart">
+              <a onClick={() => handleClick(id, title)} className="btn-product btn-cart">
                 <span>add to cart</span>
               </a>
             </div>
@@ -51,13 +73,15 @@ const List = ({data}) => {
               </div>
               {/* End .product-cat */}
               <h3 className="product-title">
-                <a href="product.html">{title}</a>
+                < Link to = {
+                  `/product/${id}`
+                } > {
+                  title
+                  } </ Link>
               </h3>
               {/* End .product-title */}
               <div className="product-content">
-                <p>
-                 {description}
-                </p>
+                <p>{description}</p>
               </div>
               {/* End .product-content */}
             </div>
@@ -66,7 +90,6 @@ const List = ({data}) => {
           {/* End .col-lg-6 */}
         </div>
         {/* End .row */}
-
       </div>
     </div>
   );
