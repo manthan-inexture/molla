@@ -118,10 +118,10 @@ const PageContent = ({ category }) => {
               </div>
               {/* proucts-start */}
               <div className="products mb-3">
-                {currentProducts.map((data) => {
+                {currentProducts.map((data) => 
                   // console.log(displayfinaldata);
-                  return <List data={data} />;
-                })}
+                 <List data={data} />
+                )}
               </div>
               {/* proucts-end */}
               {/* page-nav-start */}

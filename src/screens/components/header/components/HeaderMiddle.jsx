@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux"
 import { removeToCart } from "../../../../redux/cart/cartAction";
-
+import Search from './Search'
 function HeaderMiddle() {
   const [count, setCount] = useState(0);
   const [price, setPrice] = useState(0);
