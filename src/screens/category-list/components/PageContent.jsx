@@ -55,13 +55,13 @@ const PageContent = ({ category }) => {
         <div className="container">
           <div className="row">
             <div className="col-lg-9">
-            
-
               {/* proucts-start */}
               <div className="products mb-3">
-                {currentProducts?.map((data, index) => {
-                  return <List data={data} />;
-                })}
+                {
+                  currentProducts ? currentProducts?.map((data, index) => {
+                    return <List data={data} /> 
+                  }) : <h3>oops ,  server down</h3>
+                }
               </div>
               {/* proucts-end */}
               {/* page-nav-start */}

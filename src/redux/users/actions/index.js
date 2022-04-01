@@ -1,4 +1,4 @@
-import { ADDUSERDATA, ISUSERSIGNIN, ISNOTUSERSIGNIN } from "../type"
+import { ADDUSERDATA, ISSPINNERAC, ISSPINNERNAC } from "../type"
 
 export const adduser = (user) => {
     return {
@@ -7,13 +7,13 @@ export const adduser = (user) => {
     }
 }
 
-export const isSignin = () => {
+export const spinneractive = () => {
     return {
-        type: ISUSERSIGNIN,
+        type: ISSPINNERAC,
     }
 }
-export const isNotSignin = () => {
+export const spinnernotactive = () => {
     return {
-        type: ISNOTUSERSIGNIN,
+        type: ISSPINNERNAC,
     }
 }

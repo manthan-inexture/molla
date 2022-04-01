@@ -2,7 +2,8 @@ import { signInWithEmailAndPassword, sendSignInLinkToEmail, GoogleAuthProvider, 
 import { auth } from '../../config/firebase_config'
 import { useSelector, useDispatch } from 'react-redux'
 import { adduser } from "../../redux/users/actions";
-import { isSignin } from "../../redux/users/actions";
+import { spinneractive, spinnernotactive } from "../../redux/users/actions";
+
 import {
   useNavigate
 } from "react-router-dom"
@@ -17,6 +18,7 @@ const useFireBaseAuth = () => {
 
   const handlesignin = (e, email, password) => {
     e.preventDefault();
+    dispatch(spinneractive())
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // alert('signin succeful');
@@ -28,14 +30,14 @@ const useFireBaseAuth = () => {
           accessToken: credential.accessToken,
           emailVerified: credential.emailVerified
         }
-
         dispatch(adduser(user))
-        dispatch(isSignin())
         localStorage.setItem("islogin", true);
+        dispatch(spinnernotactive())
         navigate('/shop');
       })
       .catch((error) => {
         const errorMessage = error.message;
+        // dispatch(spinnernotactive())
         alert(errorMessage);
         console.log(error)
       });
@@ -53,7 +55,6 @@ const useFireBaseAuth = () => {
         emailVerified: credential.emailVerified
       }
       dispatch(adduser(user))
-      dispatch(isSignin())
       localStorage.setItem("islogin", "true");
       navigate('/shop');
     }).catch((error) => {
@@ -78,7 +79,6 @@ const useFireBaseAuth = () => {
           emailVerified: credential.emailVerified
         }
         dispatch(adduser(user))
-        dispatch(isSignin())
         localStorage.setItem("islogin", "true");
         navigate('/shop');
       })

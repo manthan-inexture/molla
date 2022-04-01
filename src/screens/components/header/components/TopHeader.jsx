@@ -7,7 +7,7 @@ import {
   useSelector,
   useDispatch
 } from 'react-redux'
-import { isNotSignin } from "../../../../redux/users/actions"
+// import { isNotSignin } from "../../../../redux/users/actions"
 function TopHeader() {
   const dispatch = useDispatch()
   const islog = localStorage.getItem("islogin");
@@ -17,7 +17,7 @@ function TopHeader() {
     localStorage.setItem("islogin", false);
     navigate('/signin');
   }
-  const islogin = useSelector((state) => state.usersignin.isauth);
+  // const islogin = useSelector((state) => state.usersignin.isauth);
   return (
     <>
       <div className="header-top">

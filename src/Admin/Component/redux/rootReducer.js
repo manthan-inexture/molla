@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 import productReducer from "./Product/productReducer";
 import userReducer from "./User/userReducer";
 import { getuserdata } from "../../../redux/users/reducers/getuserinfo";
-import { usersignin } from "../../../redux/users/reducers/usersignin";
+import { spinner } from "../../../redux/users/reducers/spinner";
 // import fetchReducer from "../../../redux/fetchReducer";
 import { cardItems } from "../../../redux/cart/cartReducer";
 const rootReducer = combineReducers({
@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
   Users: userReducer,
   getuserdata,
   cardItems,
-  usersignin
+  spinner
 });
 
 export default rootReducer;
