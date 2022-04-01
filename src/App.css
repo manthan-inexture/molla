@@ -3,8 +3,6 @@
 } */
 
 
-
-
 html,
 body,
 .wrapper {
@@ -3309,3 +3307,6 @@ body.iframe-mode .main-sidebar {
         height: 33px;
       }
       
+      .dropdown-cart-action a:hover{
+        color: #39f;
+      }

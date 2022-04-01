@@ -3,6 +3,7 @@ import { NavLink, useLocation} from "react-router-dom";
 import BrowseCategory from "./BrowseCategory";
 function HeaderCenter() {
   const location =useLocation()
+  console.log(location.pathname)
   return (
     <div className="sticky-wrapper" style={{}}>
       <div

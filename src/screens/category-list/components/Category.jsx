@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 
 const Category = ({changeFilter}) => {
    const [test,setTest]=useState([])
-   console.log(test)
-
+  //  console.log(test)
    useEffect(()=>{
     changeFilter(test)
    },[test])
@@ -32,6 +31,7 @@ const Category = ({changeFilter}) => {
                     className="custom-control-input"
                     id="cat-1"
                     value="all"
+                  
                     onClick={(e)=>{
                       let checked =e.target.checked;
                       if(checked)

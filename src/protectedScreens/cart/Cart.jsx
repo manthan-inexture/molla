@@ -50,7 +50,7 @@ const Cart = () => {
           {/* End .page-header */}
 
           <nav aria-label="breadcrumb" className="breadcrumb-nav">
-            <div className="container">
+           <div className="container">
               <ol className="breadcrumb">
                 <li className="breadcrumb-item">
                   <a href="index.html">Home</a>
