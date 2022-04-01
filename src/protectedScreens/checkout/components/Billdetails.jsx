@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { getFormData } from "../../../redux/cart/cartAction";
 import Payement from "./Payment";
 
 const Billdetails = () => {
   const { register, handleSubmit } = useForm();
 
+  const dispatch = useDispatch();
+
   // store encrypted data in localstorage
   const onSubmit = (data) => {
     console.log(data);
+    dispatch(getFormData(data))
     localStorage.setItem("chekout-form-data", window.btoa(JSON.stringify(data)));
   };
 

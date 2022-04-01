@@ -24,6 +24,7 @@ function HeaderMiddle() {
     setCount(cartCount);
   }, [cart]);
   console.log(cart);
+  
   return (
     <div>
       <div className="header-middle sticky-header  bg-white">

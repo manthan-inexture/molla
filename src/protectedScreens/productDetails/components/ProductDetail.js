@@ -1,15 +1,18 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import { getData } from "../../../Admin/Component/redux/Product/productAction";
 import { addToCart, getProductData } from "../../../redux/cart/cartAction";
+import { adjustQty } from "../../../redux/cart/cartAction";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ProductDetail = () => {
   const { productId } = useParams();
-  const navigate = useNavigate();
-  const data = useSelector((state) => state.product.data);
   const dispatch = useDispatch();
   const productData = useSelector((state) => state.product.data);
-  const { products } = useSelector((state) => state.cardItems);
+  const { products, cart } = useSelector((state) => state.cardItems);
+  const navigate = useNavigate();
 
   // console.log("products", products);
   useEffect(() => {
@@ -17,7 +20,11 @@ const ProductDetail = () => {
   }, []);
 
   const handleClick = (id, title) => {
-    alert(`${title} added to cart`);
+    toast.info(`${title} added to cart`, {
+      position: "bottom-right",
+      autoClose: 2000,
+      closeButton: false,
+    });
     dispatch(addToCart(id));
   };
 
@@ -26,6 +33,7 @@ const ProductDetail = () => {
       navigate("/shop");
     }
   });
+
   return (
     <>
       {products.map((product, i) =>
@@ -65,6 +73,7 @@ const ProductDetail = () => {
                   <span>ADD TO CART</span>
                 </a>
               </div>
+
               <div className="product-details-footer">
                 <div className="product-cat">
                   <span>Category:</span>
@@ -113,6 +122,7 @@ const ProductDetail = () => {
           </div>
         ) : null
       )}
+      <ToastContainer />
     </>
   );
 };
