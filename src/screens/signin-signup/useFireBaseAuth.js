@@ -3,7 +3,8 @@ import { auth } from '../../config/firebase_config'
 import { useSelector, useDispatch } from 'react-redux'
 import { adduser } from "../../redux/users/actions";
 import { spinneractive, spinnernotactive } from "../../redux/users/actions";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   useNavigate
 } from "react-router-dom"
@@ -22,6 +23,10 @@ const useFireBaseAuth = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // alert('signin succeful');
+        toast.info("signin Successful", {
+          closeButton: false,
+          autoClose: 1000,
+        });
         const credential = userCredential.user;
         const user = {
           userid: credential.uid,
@@ -37,8 +42,9 @@ const useFireBaseAuth = () => {
       })
       .catch((error) => {
         const errorMessage = error.message;
-        // dispatch(spinnernotactive())
+        dispatch(spinnernotactive())
         alert(errorMessage);
+        // toast.error("field")
         console.log(error)
       });
   }
@@ -54,6 +60,10 @@ const useFireBaseAuth = () => {
         accessToken: credential.accessToken,
         emailVerified: credential.emailVerified
       }
+      toast.info("signin Successful", {
+        closeButton: false,
+        autoClose: 1000,
+      });
       dispatch(adduser(user))
       localStorage.setItem("islogin", "true");
       navigate('/shop');
@@ -78,6 +88,10 @@ const useFireBaseAuth = () => {
           accessToken: credential.accessToken,
           emailVerified: credential.emailVerified
         }
+        toast.info("signup Successful", {
+          closeButton: false,
+          autoClose: 1000,
+        });
         dispatch(adduser(user))
         localStorage.setItem("islogin", "true");
         navigate('/shop');

@@ -222,13 +222,13 @@ const Cart = () => {
                     </NavLink>
                   </div>
                   {/* End .summary */}
-                  <a
-                    href="category.html"
+                  <NavLink
+                    to="/shop"
                     className="btn btn-outline-dark-2 btn-block mb-3"
                   >
                     <span>CONTINUE SHOPPING</span>
                     <i className="icon-refresh" />
-                  </a>
+                  </NavLink>
                 </aside>
                 {/* End .col-lg-3 */}
               </div>

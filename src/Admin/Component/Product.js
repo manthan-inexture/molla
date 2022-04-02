@@ -21,7 +21,7 @@ const Product = () => {
 
   return (
     <>
-      <div>
+      <div className="">
         <div className="wrapper">
           {/* Content Wrapper. Contains page content */}
           <div className="content-wrapper">
