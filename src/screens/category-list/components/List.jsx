@@ -67,8 +67,10 @@ const List = ({ data, index }) => {
               {/* End .product-price */}
               <div className="ratings-container">
                 <div className="ratings">
-                  
-                  <div className="ratings-val" style={{ width: `${rating.rate * 20}%` }} />
+                  <div
+                    className="ratings-val"
+                    style={{ width: `${data.rating.rate * 20}%` }}
+                  ></div>
                   {rating.rate}
                   {/* End .ratings-val */}
                 </div>

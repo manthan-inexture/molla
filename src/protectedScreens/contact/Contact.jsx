@@ -2,15 +2,40 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { NavLink } from "react-router-dom";
 
+
 const Contact = () => {
   const { register, handleSubmit } = useForm();
   // store encrypted data in localstorage
   const onSubmit = (data) => {
     console.log(data);
-    localStorage.setItem(
-      "contact_form_data",  
-      window.btoa(JSON.stringify(data))
-    );
+    // alert('ssxsxs');
+    // localStorage.setItem(
+    //   "contact_form_data",  
+    //   window.btoa(JSON.stringify(data))
+    // );
+    var data = {
+      service_id: 'V8mQZ-VMcEdtlv74Zf0is',
+      template_id: 'template_1uah6ww',
+      user_id: 'LQdxGkitLRoNWDyJc',
+      template_params: {
+        name: 'James',
+      }
+    };
+    fetch('https://api.emailjs.com/api/v1.0/email/send', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+
   };
 
   return (

@@ -5,7 +5,7 @@ const spinner = (state = initalstate, action) => {
         case ISSPINNERAC:
             return true
         case ISSPINNERNAC:
-            console.log("hlot");
+            // console.log("hlot");
             return false
         default:
             return state

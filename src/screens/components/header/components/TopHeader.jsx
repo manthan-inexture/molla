@@ -35,7 +35,7 @@ function TopHeader() {
                 <ul>
                   <li>
                     {
-                      islog == "true" ? <a onClick={handlelogout}>Logout</a> : <Link to="/signin" data-toggle="modal">
+                      islog == "true" ? <a className="pe-auto" onClick={handlelogout}>Logout</a> : <Link to="/signin" data-toggle="modal">
                       Sign in / Sign up
                       </Link>
                     }

@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 
 function CategoryList(props) {
  const productName = useParams()
- console.log("productName",productName.category)
+//  console.log("productName",productName.category)
   return (
     <div>
       {/* page-heading-start */}
