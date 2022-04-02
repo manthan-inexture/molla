@@ -9,11 +9,11 @@ function HeaderMiddle() {
   const { cart } = useSelector((state) => state.cardItems);
   const dispatch = useDispatch();
   const removeItem = (id) => {
-    console.log(id);
+    // console.log(id);
     dispatch(removeToCart(id));
   };
   useEffect(() => {
-    console.log(cart);
+    // console.log(cart);
     let cartCount = 0;
     let price = 0;
     cart.map((e) => {
@@ -23,7 +23,7 @@ function HeaderMiddle() {
     setPrice(price);
     setCount(cartCount);
   }, [cart]);
-  console.log(cart);
+  // console.log(cart);
   
   return (
     <div>

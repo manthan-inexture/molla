@@ -6,7 +6,7 @@ export const getData = () => {
     axios
       .get("http://localhost:3001/products")
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         dispatch({
           type: GET_DATA,
           payload: response.data,
@@ -21,7 +21,7 @@ export const deleteData = (id) => {
     axios
       .delete(`http://localhost:3001/products/${id}`)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         dispatch({
           type: DELETE_DATA,
         });
@@ -32,7 +32,7 @@ export const deleteData = (id) => {
 };
 
 export const updateData = (upadteddata, id) => {
-  console.log(upadteddata, id);
+  // console.log(upadteddata, id);
   var updatenew = {
     id: id,
     title: upadteddata.title,
@@ -49,7 +49,7 @@ export const updateData = (upadteddata, id) => {
     axios
       .put(`http://localhost:3001/products/${id}`, updatenew)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         dispatch({
           type: UPDATE_DATA,
         });
@@ -78,7 +78,7 @@ export const addData = (product, id) => {
     axios
       .post(`http://localhost:3001/products/`, newdata)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         dispatch({
           type: ADD_DATA,
         });

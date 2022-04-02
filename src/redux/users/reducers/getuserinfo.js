@@ -1,15 +1,9 @@
 import { ADDUSERDATA } from "../type";
-const initalstate = {
-    alluser: [],
-};
+const initalstate = {}
 const getuserdata = (state = initalstate, action) => {
     switch (action.type) {
         case ADDUSERDATA:
-
-            return {
-                ...state,
-                alluser: [...state.alluser, action.payload]
-            }
+            return action.payload
         default:
             return state
     }

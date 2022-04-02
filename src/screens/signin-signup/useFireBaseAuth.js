@@ -100,6 +100,7 @@ const useFireBaseAuth = () => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode);
+        alert(errorMessage);
         console.log(errorMessage);
       });
     // navigate("/signin")

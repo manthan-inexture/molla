@@ -5,13 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const List = ({ data }) => {
+const List = ({ data, index }) => {
   const { id, title, category, image, rating, description, price } = data;
 
   const dispatch = useDispatch();
 
   const productData = useSelector((state) => state.product.data);
-  console.log(productData);
+  // console.log(productData);
 
   useEffect(() => {
     dispatch(getProductData(productData));
@@ -27,7 +27,7 @@ const List = ({ data }) => {
   };
 
   return (
-    <>
+    <div key={index}>
       <div className="product product-list">
         <div className="row">
           <div className="col-6 col-sm-4 col-md-4 col-lg-4">
@@ -101,7 +101,7 @@ const List = ({ data }) => {
           </div>
         </div>
       <ToastContainer/>
-    </>
+    </div>
   )
 };
 

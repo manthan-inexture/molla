@@ -118,9 +118,8 @@ const PageContent = ({ category }) => {
               </div>
               {/* proucts-start */}
               <div className="products mb-3">
-                {currentProducts.map((data) => 
-                  // console.log(displayfinaldata);
-                 <List data={data} />
+                {currentProducts.map((data, index) =>
+                  <List data={data} key={index} />
                 )}
               </div>
               {/* proucts-end */}

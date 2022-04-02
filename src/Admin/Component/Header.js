@@ -32,7 +32,7 @@ const Header = () => {
         </ul>
         {/* Right navbar links */}
         <ul className="navbar-nav ml-auto">
-          <button type="button" class="btn btn-outline-primary mr-2 mt-1 mb-1">
+          <button type="button" className="btn btn-outline-primary mr-2 mt-1 mb-1">
             Log Out
           </button>
         </ul>

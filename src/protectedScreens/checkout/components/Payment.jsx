@@ -41,16 +41,16 @@ const Payement = () => {
             </thead>
             <tbody>
               {
-                cart.map((data) => {
+                cart.map((data, index) => {
                   return (
-                    <>
+                    <div key={index}>
                       <tr>
                         <td>
                           <a>{data.title}</a>
                         </td>
                         <td>${`${data.price} x ${data.qty}`}</td>
                       </tr>
-                    </>
+                    </div>
                   )
                 })
               }

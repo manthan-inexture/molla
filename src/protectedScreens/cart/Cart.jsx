@@ -27,6 +27,7 @@ const Cart = () => {
     let price = 0;
     cart.map((e) => {
       price += e.qty * e.price;
+
     })
     setPrice(price)
   }, [cart])
@@ -82,9 +83,9 @@ const Cart = () => {
                       </tr>
                     </thead>
                     {
-                      cart.map((data) => {
+                      cart.map((data, index) => {
                         return (
-                          <>
+                          <div className="index">
                             <tbody>
                               <tr>
                                 <td className="product-col">
@@ -133,7 +134,7 @@ const Cart = () => {
                                 </td>
                               </tr>
                             </tbody>
-                          </>
+                          </div>
                         )
                       })
                     }
