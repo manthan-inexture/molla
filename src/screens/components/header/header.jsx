@@ -4,7 +4,7 @@ import HeaderMiddle from "./components/HeaderMiddle";
 import TopHeader from "./components/TopHeader";
 import MobileMenu from "./components/MobileMenu";
 function Header() {
-  useEffect(() => {
+  useEffect(() => { 
     document.getElementById("adminCSS")?.remove();
   }, []);
 
