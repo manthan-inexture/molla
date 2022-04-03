@@ -8,7 +8,7 @@ const PageContent = ({ category }) => {
   const All_Products = useSelector((state) => state?.product?.data); // all product
   const [filter, setFilter] = useState([]); //fiter array for check box(value)
   const [filterdata, setFilterdata] = useState([]); //check box no filter data
-  const [sort, setSort] = useState() //short
+  const [sort, setSort] = useState(); //short
   // const [displayfinaldata, setDisplayfinaldata] = useState([]); //final data
 
   //pagination
@@ -21,7 +21,7 @@ const PageContent = ({ category }) => {
     indexOfLastProduct
   );
   const paginate = (number) => setCurrentPage(number);
-//filter for category 
+  //filter for category
   useEffect(() => {
     if (category === "all" || category === undefined) {
       setFilter(["all"]);
@@ -39,18 +39,18 @@ const PageContent = ({ category }) => {
     } else if (category.toLowerCase().includes("electronics")) {
       setFilter(["electronics"]);
     } else {
-      alert('No result found');
+      alert("No result found");
       setFilter([category]);
     }
   }, [category]);
 
-//filter for checkbox
+  //filter for checkbox
   useEffect(() => {
     // console.log("hey", All_Products);
     if (All_Products.length !== 0) {
       const data = All_Products?.filter((item, index) => {
         // console.log(filter, item.category, filter.includes(item.category));
-        if (filter.includes("all")) { 
+        if (filter.includes("all")) {
           return true;
         } else return filter.includes(item.category);
       });
@@ -60,9 +60,8 @@ const PageContent = ({ category }) => {
   }, [filter]);
 
   const sortingFilterData = (e) => {
-    setSort(e)
-  }
-
+    setSort(e);
+  };
 
   const changeFilter = (arr) => {
     setFilter(arr);
@@ -70,35 +69,43 @@ const PageContent = ({ category }) => {
 
   useEffect(() => {
     switch (sort) {
-      case 'popularity':
-        console.log("switch", sort)
-        setFilterdata(filterdata.sort(function (a, b) {
-          return b.rating.count - a.rating.count;
-        }))
+      case "popularity":
+        console.log("switch", sort);
+        setFilterdata(
+          filterdata.sort(function(a, b) {
+            return b.rating.count - a.rating.count;
+          })
+        );
         break;
-      case 'mostRated':
-        console.log("switch", sort)
-        setFilterdata(filterdata.sort(function (a, b) {
-          return b.rating.rate - a.rating.rate;
-        }))
-        console.log(filterdata)
+      case "mostRated":
+        console.log("switch", sort);
+        setFilterdata(
+          filterdata.sort(function(a, b) {
+            return b.rating.rate - a.rating.rate;
+          })
+        );
+        console.log(filterdata);
         break;
-      case 'lowtoHigh':
-        console.log("switch", sort)
-        setFilterdata(filterdata.sort(function (a, b) {
-          return a.price - b.price;
-        }))
+      case "lowtoHigh":
+        console.log("switch", sort);
+        setFilterdata(
+          filterdata.sort(function(a, b) {
+            return a.price - b.price;
+          })
+        );
         break;
-      case 'hightoLaw':
-        console.log("switch", sort)
-        setFilterdata(filterdata.sort(function (a, b) {
-          return b.price - a.price;
-        }))
+      case "hightoLaw":
+        console.log("switch", sort);
+        setFilterdata(
+          filterdata.sort(function(a, b) {
+            return b.price - a.price;
+          })
+        );
         break;
       default:
         break;
     }
-  }, [sort])
+  }, [sort]);
 
   //sorting function
   // const sortingFilterData = (value) => {
@@ -158,11 +165,10 @@ const PageContent = ({ category }) => {
               </div>
               {/* proucts-start */}
               <div className="products mb-3">
-
-                {currentProducts.map((data) => {
+                {currentProducts.map((data, index) => {
                   // console.log(displayfinaldata);
                   // console.log("iuehrgieur");
-                  return <List data={data} />;
+                  return <List data={data} key={index} />;
                 })}
               </div>
               {/* proucts-end */}

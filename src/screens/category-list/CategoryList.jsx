@@ -4,9 +4,9 @@ import CategoryListNav from "./components/CategoryListNav";
 import PageContent from "./components/PageContent";
 import { useParams } from "react-router-dom";
 
-function CategoryList(props) {
- const productName = useParams()
-//  console.log("productName",productName.category)
+function CategoryList() {
+  const productName = useParams();
+  //  console.log("productName",productName.category)
   return (
     <div>
       {/* page-heading-start */}
@@ -16,7 +16,7 @@ function CategoryList(props) {
       <CategoryListNav />
       {/* page-list-nav end */}
       {/* main-content-start */}
-      <PageContent  category={productName.category}/>
+      <PageContent category={productName.category} />
       {/* main-content-end */}
     </div>
   );

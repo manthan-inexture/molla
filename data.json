@@ -239,18 +239,6 @@
         "rate": 3.6,
         "count": 145
       }
-    },
-    {
-      "id": 21,
-      "title": "demo",
-      "price": 232,
-      "description": "aldkadl",
-      "category": "jewelery",
-      "image": "blob:http://localhost:3000/fdfbf7da-8623-41b8-b957-0943e58baf20",
-      "rating": {
-        "rate": 2.3,
-        "count": 234
-      }
     }
   ]
 }

@@ -1,35 +1,41 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Payement = () => {
   const { cart } = useSelector((state) => state.cardItems);
   const [price, setPrice] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
+    if (cart.length === 0) {
+      navigate("/");
+    }
     console.log(cart);
     let price = 0;
     cart.map((e) => {
       price += e.qty * e.price;
-    })
-    setPrice(price)
-  }, [cart])
+    });
+    setPrice(price);
+  }, [cart]);
 
   const freeDel = () => {
-    setTotalPrice(0)
-  }
+    setTotalPrice(0);
+  };
 
   const standardDel = () => {
-    setTotalPrice(10)
-  }
+    setTotalPrice(10);
+  };
 
   const expressDel = () => {
-    setTotalPrice(20)
-  }
+    setTotalPrice(20);
+  };
   return (
     <>
       <aside className="col-lg-3">
-        <div className="summary">
+        <div className="summary" style={{ width: "fit-content" }}>
           <h3 className="summary-title">Your Order</h3>
           {/* End .summary-title */}
           <table className="table table-summary">
@@ -40,20 +46,16 @@ const Payement = () => {
               </tr>
             </thead>
             <tbody>
-              {
-                cart.map((data, index) => {
-                  return (
-                    <div key={index}>
-                      <tr>
-                        <td>
-                          <a>{data.title}</a>
-                        </td>
-                        <td>${`${data.price} x ${data.qty}`}</td>
-                      </tr>
-                    </div>
-                  )
-                })
-              }
+              {cart.map((data, index) => {
+                return (
+                  <tr key={index}>
+                    <td>
+                      <a>{data.title}</a>
+                    </td>
+                    <td>${`${data.price} x ${data.qty}`}</td>
+                  </tr>
+                );
+              })}
 
               <tr className="summary-subtotal">
                 <td>Subtotal:</td>
@@ -67,52 +69,64 @@ const Payement = () => {
 
               <tr className="summary-shipping-row">
                 <td>
-                  <div className="custom-control custom-radio"> <input
-                    type="radio"
-                    id="free-shipping"
-                    name="shipping"
-                    className="custom-control-input"
-                    onClick={freeDel}
-                  /> <label
-                    className="custom-control-label"
-                    htmlFor="free-shipping"
-                  >
+                  <div className="custom-control custom-radio">
+                    {" "}
+                    <input
+                      type="radio"
+                      id="free-shipping"
+                      name="shipping"
+                      className="custom-control-input"
+                      onClick={freeDel}
+                    />{" "}
+                    <label
+                      className="custom-control-label"
+                      htmlFor="free-shipping"
+                    >
                       Free Shipping
-                    </label></div>
+                    </label>
+                  </div>
                 </td>
                 <td>$0.00</td>
               </tr>
               <tr className="summary-shipping-row">
                 <td>
-                  <div className="custom-control custom-radio"> <input
-                    type="radio"
-                    id="standard-shipping"
-                    name="shipping"
-                    className="custom-control-input"
-                    onClick={standardDel}
-                  /> <label
-                    className="custom-control-label"
-                    htmlFor="standard-shipping"
-                  >
+                  <div className="custom-control custom-radio">
+                    {" "}
+                    <input
+                      type="radio"
+                      id="standard-shipping"
+                      name="shipping"
+                      className="custom-control-input"
+                      onClick={standardDel}
+                    />{" "}
+                    <label
+                      className="custom-control-label"
+                      htmlFor="standard-shipping"
+                    >
                       Standard
-                    </label></div>
+                    </label>
+                  </div>
                 </td>
                 <td>$10.00</td>
               </tr>
               <tr className="summary-shipping-row">
                 <td>
-                  <div className="custom-control custom-radio"> <input
-                    type="radio"
-                    id="express-shipping"
-                    name="shipping"
-                    className="custom-control-input"
-                    onClick={expressDel}
-                  /> <label
-                    className="custom-control-label"
-                    htmlFor="express-shipping"
-                  >
+                  <div className="custom-control custom-radio">
+                    {" "}
+                    <input
+                      type="radio"
+                      id="express-shipping"
+                      name="shipping"
+                      className="custom-control-input"
+                      onClick={expressDel}
+                    />{" "}
+                    <label
+                      className="custom-control-label"
+                      htmlFor="express-shipping"
+                    >
                       Express
-                    </label></div>
+                    </label>
+                  </div>
                 </td>
                 <td>$20.00</td>
               </tr>
@@ -306,7 +320,7 @@ const Payement = () => {
             }}
           >
             <span className="btn-text">Place Order</span>
-            <span className="btn-hover-text">Proceed to Checkout</span>
+            <span className="btn-hover-text">Confirm Order</span>
           </button>
         </div>
         {/* End .summary */}

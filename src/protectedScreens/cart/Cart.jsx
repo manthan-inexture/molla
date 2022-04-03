@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { adjustQty, removeToCart } from "../../redux/cart/cartAction";
+import { Alert } from "react-bootstrap";
 
 const Cart = () => {
   const { cart } = useSelector((state) => state.cardItems);
@@ -11,13 +12,13 @@ const Cart = () => {
   const qtyAdjust = (id, val) => {
     console.log(val);
     console.log(id);
-    dispatch(adjustQty(id, val))
-  }
+    dispatch(adjustQty(id, val));
+  };
 
   const removeItem = (id) => {
     console.log(id);
     dispatch(removeToCart(id));
-  }
+  };
 
   const [price, setPrice] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -27,10 +28,19 @@ const Cart = () => {
     let price = 0;
     cart.map((e) => {
       price += e.qty * e.price;
+    });
+    setPrice(price);
+  }, [cart]);
 
-    })
-    setPrice(price)
-  }, [cart])
+  const navigate = useNavigate();
+  const handleProceed = () => {
+    if (cart.length > 0) {
+      navigate("/checkout");
+    } else {
+      window.alert("Please add few items in cart!");
+    }
+  };
+
   return (
     <>
       <div className="page-content">
@@ -51,7 +61,7 @@ const Cart = () => {
           {/* End .page-header */}
 
           <nav aria-label="breadcrumb" className="breadcrumb-nav">
-           <div className="container">
+            <div className="container">
               <ol className="breadcrumb">
                 <li className="breadcrumb-item">
                   <a href="index.html">Home</a>
@@ -82,14 +92,23 @@ const Cart = () => {
                         <th />
                       </tr>
                     </thead>
-                    {
-                      cart.map((data, index) => {
-                        return (
-                          <div className="index">
-                            <tbody>
+                    <tbody>
+                      {cart.length === 0 ? (
+                        <tr>
+                          <td colSpan={5}>
+                            <Alert variant="warning">No Items in Cart!</Alert>{" "}
+                          </td>
+                        </tr>
+                      ) : (
+                        cart.map((data, index) => {
+                          return (
+                            <Fragment key={index}>
                               <tr>
                                 <td className="product-col">
-                                  <div className="product" style={{ height: "100px" }}>
+                                  <div
+                                    className="product"
+                                    style={{ height: "100px" }}
+                                  >
                                     <figure className="product-media">
                                       <a href="#">
                                         <img
@@ -99,7 +118,10 @@ const Cart = () => {
                                       </a>
                                     </figure>
                                     <h3 className="product-title">
-                                      <a href="#" style={{ textDecoration: "none" }}>
+                                      <a
+                                        href="#"
+                                        style={{ textDecoration: "none" }}
+                                      >
                                         {data.title}
                                       </a>
                                     </h3>
@@ -113,7 +135,6 @@ const Cart = () => {
                                     <input
                                       type="number"
                                       className="form-control"
-                                      defaultValue={1}
                                       min={1}
                                       max={10}
                                       step={1}
@@ -121,63 +142,32 @@ const Cart = () => {
                                       data-decimals={0}
                                       onKeyDown={(e) => e.preventDefault()}
                                       required
-                                      onChange={(e) => qtyAdjust(data.id, e.target.value)}
+                                      onChange={(e) =>
+                                        qtyAdjust(data.id, e.target.value)
+                                      }
                                     />
                                   </div>
                                   {/* End .cart-product-quantity */}
                                 </td>
-                                <td className="total-col">${(data.price * data.qty).toFixed(2)}</td>
+                                <td className="total-col">
+                                  ${(data.price * data.qty).toFixed(2)}
+                                </td>
                                 <td className="remove-col">
                                   <button className="btn-remove">
-                                    <i onClick={() => removeItem(data.id)} className="icon-close" />
+                                    <i
+                                      onClick={() => removeItem(data.id)}
+                                      className="icon-close"
+                                    />
                                   </button>
                                 </td>
                               </tr>
-                            </tbody>
-                          </div>
-                        )
-                      })
-                    }
+                            </Fragment>
+                          );
+                        })
+                      )}
+                    </tbody>
                   </table>
                   {/* End .table table-wishlist */}
-                  <div className="cart-bottom">
-                    <div className="cart-discount">
-                      <form action="#">
-                        <div className="input-group">
-                          <input
-                            type="text"
-                            className="form-control shadow-none"
-                            required
-                            placeholder="coupon code"
-                          />
-                          <div className="input-group-append">
-                            <button
-                              className="btn btn-outline-primary-2"
-                              style={{
-                                border: "1px solid #c96",
-                                fontSize: "1.4rem",
-                              }}
-                              type="submit"
-                            >
-                              <i className="icon-long-arrow-right" />
-                            </button>
-                          </div>
-                          {/* .End .input-group-append */}
-                        </div>
-                        {/* End .input-group */}
-                      </form>
-                    </div>
-                    {/* End .cart-discount */}
-                    <a
-                      href="#"
-                      className="btn btn-outline-dark-2 shadow-none"
-                      style={{ border: "1px solid #c96" }}
-                    >
-                      <span>UPDATE CART</span>
-                      <i className="icon-refresh" />
-                    </a>
-                  </div>
-                  {/* End .cart-bottom */}
                 </div>
                 {/* End .col-lg-9 */}
                 <aside className="col-lg-3">
@@ -214,13 +204,13 @@ const Cart = () => {
                       </tbody>
                     </table>
                     {/* End .table table-summary */}
-                    <NavLink
-                      to="/checkout"
+                    <button
+                      onClick={handleProceed}
                       className="btn btn-outline-primary-2 btn-order btn-block shadow-none"
                       style={{ border: "1px solid #c96", fontSize: "1.4rem" }}
                     >
                       PROCEED TO CHECKOUT
-                    </NavLink>
+                    </button>
                   </div>
                   {/* End .summary */}
                   <NavLink

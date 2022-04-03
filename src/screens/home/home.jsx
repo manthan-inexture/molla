@@ -1,6 +1,4 @@
-import React, {
-  useEffect
-} from 'react'
+import React, { useEffect } from "react";
 import Carosol from "./components/Carosol.jsx";
 import PupularCategories from "./components/PupularCategories.jsx";
 import PupularDeales from "./components/PupularDeales.jsx";
@@ -9,9 +7,17 @@ import ShopToday from "./components/ShopToday.jsx";
 import Brand from "./components/Brand.jsx";
 import Services from "./components/Services.jsx";
 
-
 import Latestdeal from "./components/latestdeal.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import { getProductData } from "../../redux/cart/cartAction.js";
 function Home() {
+  const productData = useSelector((state) => state.product.data);
+  // console.log(productData);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getProductData(productData));
+  }, [productData]);
 
   return (
     <>
@@ -51,16 +57,14 @@ function Home() {
         </main>
 
         {/*Footer end */}
-          <Latestdeal />
+        <Latestdeal />
         {/*Footer end */}
       </div>
       <button id="scroll-top" title="Back to Top">
-        <i className="icon-arrow-up"></i>
+        <i className="icon-arrow-up" />
       </button>
-  
-      
     </>
-  )
+  );
 }
 
-export default Home
+export default Home;

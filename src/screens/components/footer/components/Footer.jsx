@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
-   <div>
+    <div>
       <footer className="footer">
         <div className="footer-middle">
           <div className="container">
@@ -20,7 +21,6 @@ function Footer() {
                     Praesent dapibus, neque id cursus ucibus, tortor neque
                     egestas augue, eu vulputate magna eros eu erat.{" "}
                   </p>
-                
                 </div>
                 {/* End .widget about-widget */}
               </div>
@@ -31,10 +31,14 @@ function Footer() {
                   {/* End .widget-title */}
                   <ul className="widget-list">
                     <li>
-                      <a href="about.html">About Molla</a>
+                      <Link to="/about">
+                        <a href="about.html">About Molla</a>
+                      </Link>
                     </li>
                     <li>
-                      <a href="contact.html">Contact us</a>
+                      <Link to="/contact">
+                        <a href="contact.html">Contact us</a>
+                      </Link>
                     </li>
                   </ul>
                   {/* End .widget-list */}
@@ -42,33 +46,35 @@ function Footer() {
                 {/* End .widget */}
               </div>
               {/* End .col-sm-6 col-lg-3 */}
-              
+
               <div className="col-sm-6 col-lg-3">
                 <div className="widget">
                   <h4 className="widget-title">My Account</h4>
                   {/* End .widget-title */}
                   <ul className="widget-list">
                     <li>
-                      <a href="#">Sign In</a>
+                      <Link to="/signin">
+                        <a href="#">Sign In</a>
+                      </Link>
                     </li>
                     <li>
-                      <a href="cart.html">View Cart</a>
+                      <Link to="/viewcart">
+                        <a href="cart.html">View Cart</a>
+                      </Link>
                     </li>
-                   
                   </ul>
                   {/* End .widget-list */}
                 </div>
                 {/* End .widget */}
-                </div>
-                <div className="col-sm-6 col-lg-3">
+              </div>
+              <div className="col-sm-6 col-lg-3">
                 <div className="widget-call">
-                    <i className="icon-phone" />
-                    Got Question? Call us 24/7
-                    <a href="tel:#">+0123 456 789</a>
-                  </div>
-                  {/* End .widget-call */}
-               
+                  <i className="icon-phone" />
+                  Got Question? Call us 24/7
+                  <a href="#">+0123 456 789</a>
                 </div>
+                {/* End .widget-call */}
+              </div>
 
               {/* End .col-sm-6 col-lg-3 */}
             </div>
@@ -80,7 +86,7 @@ function Footer() {
         <div className="footer-bottom">
           <div className="container">
             <p className="footer-copyright">
-              Copyright © 2019 Molla Store. All Rights Reserved.
+              Copyright © 2022 Molla Store. All Rights Reserved.
             </p>
             {/* End .footer-copyright */}
             <figure className="footer-payments">

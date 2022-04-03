@@ -5,7 +5,7 @@ import AddForm from "./AddForm";
 import UpdateForm from "./UpdateForm";
 
 const Product = () => {
-  const data = useSelector((state) => state.product.data);
+  const data = useSelector(state => state.product.data);
 
   const dispatch = useDispatch();
 
@@ -13,7 +13,7 @@ const Product = () => {
     dispatch(getData());
   }, []);
 
-  const handledelete = (id) => {
+  const handledelete = id => {
     if (window.confirm("Are you sure you want to delete this product ?")) {
       dispatch(deleteData(id));
     }
@@ -75,7 +75,7 @@ const Product = () => {
                           <td>
                             <img
                               src={item.image}
-                              style={{ width: "250px", height: "250px" }}
+                              style={{ width: "250px", height: "auto" }}
                             />
                           </td>
                           <td>{item.rating.rate}</td>

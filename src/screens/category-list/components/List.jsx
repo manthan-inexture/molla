@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { addToCart, getProductData } from "../../../redux/cart/cartAction";
+import { addToCart } from "../../../redux/cart/cartAction";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -9,13 +9,6 @@ const List = ({ data, index }) => {
   const { id, title, category, image, rating, description, price } = data;
 
   const dispatch = useDispatch();
-
-  const productData = useSelector((state) => state.product.data);
-  // console.log(productData);
-
-  useEffect(() => {
-    dispatch(getProductData(productData));
-  }, []);
 
   const handleClick = (id, title) => {
     toast.info(`${title} added to cart`, {
@@ -70,41 +63,41 @@ const List = ({ data, index }) => {
                   <div
                     className="ratings-val"
                     style={{ width: `${data.rating.rate * 20}%` }}
-                  ></div>
+                  />
                   {rating.rate}
                   {/* End .ratings-val */}
                 </div>
                 {/* End .ratings */}
                 <span className="ratings-text">( {rating.count} Reviews )</span>
-                  {/* <div
+                {/* <div
                     className="ratings-val"
                     style={{ width: `${rating.rate * 20}%` }}
                   /> */}
-                  {/* End .ratings-val */}
-                </div>
-                {/* End .ratings */}
-                <span className="ratings-text">( {rating.rate} rating )</span>
+                {/* End .ratings-val */}
               </div>
-              {/* End .rating-container */}
-
-              {/* End .product-action */}
-              <a
-                onClick={() => handleClick(id, title)}
-                className="btn-product  btn-cart"
-                style={{
-                  width: "250px",
-                  border: "1px solid #39f",
-                  cursor: "pointer",
-                }}
-              >
-                <span>add to cart</span>
-              </a>
+              {/* End .ratings */}
+              <span className="ratings-text">( {rating.rate} rating )</span>
             </div>
+            {/* End .rating-container */}
+
+            {/* End .product-action */}
+            <a
+              onClick={() => handleClick(id, title)}
+              className="btn-product  btn-cart"
+              style={{
+                width: "250px",
+                border: "1px solid #39f",
+                cursor: "pointer",
+              }}
+            >
+              <span>add to cart</span>
+            </a>
           </div>
         </div>
-      <ToastContainer/>
+      </div>
+      <ToastContainer />
     </div>
-  )
+  );
 };
 
 export default List;

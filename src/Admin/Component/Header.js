@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import "../../index.css";
 
 const Header = () => {
   useEffect(() => {
@@ -32,7 +33,10 @@ const Header = () => {
         </ul>
         {/* Right navbar links */}
         <ul className="navbar-nav ml-auto">
-          <button type="button" className="btn btn-outline-primary mr-2 mt-1 mb-1">
+          <button
+            type="button"
+            className="btn btn-outline-primary mr-2 mt-1 mb-1"
+          >
             Log Out
           </button>
         </ul>
@@ -57,7 +61,7 @@ const Header = () => {
           {/* Sidebar Menu */}
           <nav className="mt-2">
             <ul
-              className="nav nav-pills nav-sidebar flex-column"
+              className="nav nav-pills nav-sidebar flex-column list-unstyled text-start"
               data-widget="treeview"
               role="menu"
               data-accordion="false"
@@ -65,21 +69,21 @@ const Header = () => {
               {/* Add icons to the links using the .nav-icon class
                  with font-awesome or any other icon font library */}
               <li className="nav-item">
-                <Link to="/admin/users" className="nav-link">
+                <Link to="/admin/users" className="nav-link text-left">
                   <i className="nav-icon fas fa-th" />
                   <p>Users</p>
                 </Link>
-                {/* <a href="user.html" className="nav-link"> */}
+                {/* <a href="user.html" className="nav-link text-left"> */}
                 {/* </a> */}
               </li>
               <li className="nav-item">
-                <Link to="/admin/products" className="nav-link">
+                <Link to="/admin/products" className="nav-link text-left">
                   <i className="nav-icon fas fa-th" />
                   <p>Products</p>
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/admin/orders" className="nav-link">
+                <Link to="/admin/orders" className="nav-link text-left">
                   <i className="nav-icon fas fa-th" />
                   <p>Orders</p>
                 </Link>

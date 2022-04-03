@@ -1,7 +1,7 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { addToCart, getProductData } from "../../../redux/cart/cartAction";
+import { addToCart } from "../../../redux/cart/cartAction";
 
 function NewArrivals() {
   const dispatch = useDispatch();
@@ -12,6 +12,7 @@ function NewArrivals() {
   // console.log(currentProducts)
 
   const handleClick = (id, title) => {
+    console.log(id, title);
     alert(`${title} added to cart`);
     dispatch(addToCart(id));
   };
@@ -29,8 +30,8 @@ function NewArrivals() {
               aria-labelledby="new-all-link"
             >
               <div className="row">
-                {currentProducts.map((product) => (
-                  <>
+                {currentProducts.map((product, index) => (
+                  <Fragment key={index}>
                     <div
                       className="col-md-4 col-sm-6  col-lg-3 mx-auto"
                       key={product.id}
@@ -94,7 +95,7 @@ function NewArrivals() {
                       </div>
                       {/* End .product */}
                     </div>
-                  </>
+                  </Fragment>
                 ))}
               </div>
             </div>

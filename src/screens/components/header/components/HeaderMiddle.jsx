@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { removeToCart } from "../../../../redux/cart/cartAction";
-import Search from './Search'
+import Search from "./Search";
 function HeaderMiddle() {
   const [count, setCount] = useState(0);
   const [price, setPrice] = useState(0);
@@ -19,12 +19,13 @@ function HeaderMiddle() {
     cart.map((e) => {
       cartCount += e.qty;
       price += e.qty * e.price;
+      return e;
     });
     setPrice(price);
     setCount(cartCount);
   }, [cart]);
   // console.log(cart);
-  
+
   return (
     <div>
       <div className="header-middle sticky-header  bg-white">
@@ -69,9 +70,9 @@ function HeaderMiddle() {
               </a>
               <div className="dropdown-menu dropdown-menu-right">
                 <div className="dropdown-cart-products">
-                  {cart.map((data) => {
+                  {cart.map((data, index) => {
                     return (
-                      <>
+                      <Fragment key={index}>
                         <div className="product">
                           <div className="product-cart-details">
                             <h4 className="product-title">
@@ -101,7 +102,7 @@ function HeaderMiddle() {
                             />
                           </a>
                         </div>
-                      </>
+                      </Fragment>
                     );
                   })}
 
